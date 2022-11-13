@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     public static Mode mode = Mode.game;
 
     public KeyCode EditorKey = KeyCode.B;
-
+    public KeyCode Group0 = KeyCode.W;
 
     [SerializeField]
     private GameObject EditorUI;
@@ -36,6 +36,14 @@ public class InputManager : MonoBehaviour
             ProcessEK();
         if (Input.GetMouseButtonUp(0))
             UICursor.EndDragging();
+        if(!UICursor.isDragging && Input.GetMouseButtonDown(0) && mode == Mode.editor)
+            PartPlacer.DoEditorRaycast();
+
+        if(mode == Mode.game && Input.GetKeyDown(Group0))
+        PartGroups.ProcessGroupDown(0);
+        if(mode == Mode.game && Input.GetKeyUp(Group0))
+        PartGroups.ProcessGroupUp(0);
+
     }
 
 }

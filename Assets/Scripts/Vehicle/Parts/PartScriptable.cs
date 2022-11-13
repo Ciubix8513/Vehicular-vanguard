@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public struct PartData
+public class PartData
 {
     public string name;
     public string description;

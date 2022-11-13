@@ -64,6 +64,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.postprocessing": {
+      "version": "3.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "13.1.8",
       "depth": 1,
@@ -179,6 +188,15 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.visualeffectgraph": {
+      "version": "13.1.8",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.shadergraph": "13.1.8",
+        "com.unity.render-pipelines.core": "13.1.8"
+      }
+    },
     "com.unity.visualscripting": {
       "version": "1.7.8",
       "depth": 0,
@@ -188,6 +206,23 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.unityfx.outline": {
+      "version": "0.8.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "com.unityfx.outline.urp": {
+      "version": "0.5.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unityfx.outline": "0.8.5",
+        "com.unity.render-pipelines.universal": "7.0.0"
+      },
+      "url": "https://registry.npmjs.org"
     },
     "com.vanbassum.wakatime": {
       "version": "https://github.com/vanBassum/Wakatime.Unity.git",

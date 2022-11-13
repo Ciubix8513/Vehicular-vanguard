@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1322882248486772278}
   - component: {fileID: -6469673328779303774}
   - component: {fileID: 4881350803425773671}
-  - component: {fileID: -8090445685100613853}
   m_Layer: 0
   m_Name: 1x1-Cube
   m_TagString: Part
@@ -112,8 +111,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8fd6f42a31666b2b583db3afa67db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partData:
+    name: 
+    description: 
+    prefab: {fileID: 0}
+    sprite: {fileID: 0}
   m_health: 10
   m_size: {x: 1, y: 1, z: 1}
+  parentFace: {x: 0, y: 0, z: 0}
+  isRoot: 0
 --- !u!54 &4881350803425773671
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,18 +136,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &-8090445685100613853
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1678200615871335973}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
