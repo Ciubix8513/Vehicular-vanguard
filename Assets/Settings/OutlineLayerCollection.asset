@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0c11168277cf4eb3b4b89706e6aa5, type: 3}
   m_Name: OutlineLayerCollection
   m_EditorClassIdentifier: 
-  _layers: []
-  _ignoreLayerMask: 0
+  _layers:
+  - _settings:
+      _outlineSettings: {fileID: 11400000, guid: 726bfe95cd8f7a7e2bbbaa7e1268e93c,
+        type: 2}
+      _outlineColor: {r: 1, g: 0, b: 0, a: 1}
+      _outlineWidth: 18
+      _outlineIntensity: 2
+      _outlineAlphaCutoff: 0.9
+      _outlineMode: 1
+    _name: Outline
+    _enabled: 1
+    _mergeLayerObjects: 0
+  _ignoreLayerMask: 31

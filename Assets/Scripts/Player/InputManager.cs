@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
             ProcessEK();
-        if (Input.GetMouseButtonUp(0))
+        if (UICursor.isDragging && Input.GetMouseButtonUp(0))
             UICursor.EndDragging();
         if(!UICursor.isDragging && Input.GetMouseButtonDown(0) && mode == Mode.editor)
             PartPlacer.DoEditorRaycast();
