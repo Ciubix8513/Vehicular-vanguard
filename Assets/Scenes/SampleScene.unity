@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &129240994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1072,7 @@ GameObject:
   - component: {fileID: 846452186}
   - component: {fileID: 846452188}
   - component: {fileID: 846452189}
+  - component: {fileID: 846452190}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1133,6 +1134,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734bfeeb3734ef71887a918ae62b376e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &846452190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846452185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2702a32ca9cedccc8963ec7afa50d5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationPrefab: {fileID: 2013313853442082195, guid: 88021e42a43cfc407803e252a7be31c3,
+    type: 3}
 --- !u!1 &969734868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1372,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1111072779}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 846452190}
+        m_TargetAssemblyTypeName: GizmoRaycaster, Assembly-CSharp
+        m_MethodName: SwitchMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1111072779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1430,7 +1457,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1621,6 +1648,112 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 100, y: 0, z: 0}
+--- !u!1001 &1689159965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 2035620971}
+    m_Modifications:
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7422335
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7422335
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7422335
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013313853442082195, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_Name
+      value: Rotation gizmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013313853442082195, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117852228909729500, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894469623642039826, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660802164970653106, guid: 88021e42a43cfc407803e252a7be31c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 88021e42a43cfc407803e252a7be31c3, type: 3}
 --- !u!1 &1700651783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1890,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1741826620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 846452190}
+        m_TargetAssemblyTypeName: GizmoRaycaster, Assembly-CSharp
+        m_MethodName: SwitchMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1741826620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,6 +1941,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741826617}
   m_CullTransparentMesh: 1
+--- !u!4 &1807758022 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1205674856049909545, guid: 88021e42a43cfc407803e252a7be31c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1689159965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1835173215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,7 +2098,7 @@ PrefabInstance:
     - target: {fileID: 1794146516732325973, guid: 5f11c5f4ced14c8dbbda722af408a1cc,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1794146516732325974, guid: 5f11c5f4ced14c8dbbda722af408a1cc,
         type: 3}
@@ -2005,7 +2156,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1794146516732325974, guid: 5f11c5f4ced14c8dbbda722af408a1cc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1807758022}
   m_SourcePrefab: {fileID: 100100000, guid: 5f11c5f4ced14c8dbbda722af408a1cc, type: 3}
 --- !u!1 &1868624739
 GameObject:
