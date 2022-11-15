@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
         if (mode == Mode.menu) return;
         if (mode == Mode.editor)
         {
+            GizmoRaycaster.HideGizmo();
             mode = Mode.game;
             EditorUI.SetActive(false);
             Time.timeScale = 1;

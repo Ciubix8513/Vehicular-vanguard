@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
+[System.Serializable]
 public struct attachments
 {
     public bool up;
@@ -12,7 +10,33 @@ public struct attachments
     public bool right;
     public bool forward;
     public bool backward;
-
+    public attachments RotateX()
+    {
+        var o = this;
+        o.up = this.backward;
+        o.down = this.forward;
+        o.backward = this.up;
+        o.forward = this.up;   
+        return o;
+    }
+    public attachments RotateY()
+    {
+        var o = this;
+        o.forward = this.left;
+        o.backward = this.right;
+        o.left = this.forward;
+        o.right = this.backward;
+        return o;
+    }
+    public attachments RotateZ()
+    {
+        var o = this;
+        o.up = this.left;
+        o.down = this.right;
+        o.right = this.up;
+        o.left = this.down;
+        return o;
+    }
     public bool this[Vector3Int i]
     {
         get
