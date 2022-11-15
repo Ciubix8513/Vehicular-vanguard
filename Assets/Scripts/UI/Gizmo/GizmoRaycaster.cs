@@ -62,8 +62,35 @@ public class GizmoRaycaster : MonoBehaviour
             s_axis = 1;
         else
             s_axis = 2;
+        Rotate(s_axis);
     }
-    private void Update()
+    static void Rotate(int axis)
+    {
+        var parts = s_rotatingObj.attachedParts;
+        parts[s_rotatingObj.parentFace] = false;
+        if (axis == 0)
+        {
+            // if (parts.RotateX(Input.GetKey(KeyCode.LeftShift))[s_rotatingObj.parentFace])
+            // {
+                // Debug.Log("Blocked rotation");
+                // return;
+            // }
+            Debug.Log(Input.GetKey(KeyCode.LeftShift));
+            s_rotatingObj.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift)?-90: 90,0,0));
+            // s_rotatingObj.transform.localRotation = Quaternion.Euler(s_rotatingObj.transform.localRotation.eulerAngles + new Vector3(90, 0, 0));
+            // s_rotatingObj.attachedParts = parts.RotateX(Input.GetKey(KeyCode.LeftShift));
+        }else if(axis == 1)
+        {
+            Debug.Log(Input.GetKey(KeyCode.LeftShift));
+            s_rotatingObj.transform.Rotate(new Vector3(0,Input.GetKey(KeyCode.LeftShift)?-90: 90,0));
+        }
+        else
+        {
+            Debug.Log(Input.GetKey(KeyCode.LeftShift));
+            s_rotatingObj.transform.Rotate(new Vector3(0,0,Input.GetKey(KeyCode.LeftShift)?-90: 90));
+        }
+    }
+    /*private void Update()
     {
         if (!Rotating) return;
         s_delta += Input.GetAxis(s_axis == 1 ? "Mouse X" : "Mouse Y");
@@ -98,5 +125,5 @@ public class GizmoRaycaster : MonoBehaviour
             s_rotatingObj.transform.localRotation = Quaternion.Euler(s_originalRotation.eulerAngles + new Vector3(0, 0, 90.0f * num));
 
         }
-    }
+    }*/
 }

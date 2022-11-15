@@ -83,7 +83,7 @@ public class UICursor : MonoBehaviour
             return;
         }
         partGO.gameObject.AddComponent<FixedJoint>().connectedBody = SnappingObject.GetComponent<Rigidbody>();
-        partGO.transform.parent = SnappingObject.transform;
+        partGO.transform.parent = SnappingObject.transform.parent;
         partGO.parentFace = SnappingFace * -1;
         SnappingObject.attachedParts[SnappingFace] = true;
         partGO.attachedParts[-SnappingFace] = true;

@@ -10,13 +10,21 @@ public struct attachments
     public bool right;
     public bool forward;
     public bool backward;
-    public attachments RotateX()
+    public attachments RotateX(bool minus)
     {
+        if(minus)
+        {
+            var o1 = this;
+            o1.RotateX(false);
+            o1.RotateX(false);
+            o1.RotateX(false);
+            return o1;
+        }
         var o = this;
         o.up = this.backward;
         o.down = this.forward;
         o.backward = this.up;
-        o.forward = this.up;   
+        o.forward = this.up;
         return o;
     }
     public attachments RotateY()
