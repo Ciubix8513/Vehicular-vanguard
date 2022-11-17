@@ -116,10 +116,19 @@ MonoBehaviour:
     description: 
     prefab: {fileID: 0}
     sprite: {fileID: 0}
-  m_health: 10
+  health: 0
   m_size: {x: 1, y: 1, z: 1}
+  attachedParts:
+    up: 0
+    down: 0
+    left: 0
+    right: 0
+    forward: 0
+    backward: 0
   parentFace: {x: 0, y: 0, z: 0}
   isRoot: 0
+  Activatable: 1
+  isActive: 0
 --- !u!54 &4881350803425773671
 Rigidbody:
   m_ObjectHideFlags: 0

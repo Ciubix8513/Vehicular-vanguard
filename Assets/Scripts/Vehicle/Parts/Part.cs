@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -91,11 +93,9 @@ public class Part : MonoBehaviour
     public bool isRoot;
     public bool Activatable;
     public bool isActive;
-    public void TakeDamage(int dmg)
-    {
-        health -= dmg;
-    }
-
+    public void TakeDamage(int dmg)=>health -= dmg;
+    public delegate void ActionDel();
+    public List<Tuple<ActionDel, string>> GetActions()=> new(){new Tuple<ActionDel, string>(Activate,"Activate"),new Tuple<ActionDel, string>(DeActivate,"Deactivate")};
     public void Activate() => isActive = true;
     public void DeActivate() => isActive = false;
 }

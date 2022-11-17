@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class InputMenu : MonoBehaviour
 {
-//----UI fields----
+    //----UI fields----
     [SerializeField]
     private GameObject _actionPrefab;
     [SerializeField]
@@ -13,8 +13,8 @@ public class InputMenu : MonoBehaviour
     TextMeshProUGUI _nameText;
     [SerializeField]
     TextMeshProUGUI _descText;
-    
-//----UI fields----
+
+    //----UI fields----
     private List<GameObject> _parts;
     private static Camera s_camera;
     private static InputMenu s_this;
@@ -29,20 +29,25 @@ public class InputMenu : MonoBehaviour
 
     public static void DoRaycast()
     {
-        if(!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition),out var hit,100.0f,1 << 6))return;
-        if(!hit.collider.CompareTag("Part")) return;
+        if (!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f, 1 << 6)) return;
+        if (!hit.collider.CompareTag("Part")) return;
         s_this.LoadData(hit.collider.GetComponent<Part>());
     }
 
     private void LoadData(Part part)
     {
         Debug.Log($"Loading data for part {part.partData.name}");
-        if(_part != null)
-        _part.gameObject.layer = 6;
-        _part = part;   
+        if (_part != null)
+            _part.gameObject.layer = 6;
+        _part = part;
         _part.gameObject.layer = 9;
         _nameText.text = _part.partData.name;
         _descText.text = _part.partData.description;
+
+        foreach (Transform c in _actionParent.transform)
+            Destroy(c.gameObject);
+        _part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a,_part));
+
     }
 }
 
