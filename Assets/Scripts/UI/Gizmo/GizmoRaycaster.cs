@@ -72,22 +72,23 @@ public class GizmoRaycaster : MonoBehaviour
         {
             // if (parts.RotateX(Input.GetKey(KeyCode.LeftShift))[s_rotatingObj.parentFace])
             // {
-                // Debug.Log("Blocked rotation");
-                // return;
+            // Debug.Log("Blocked rotation");
+            // return;
             // }
             Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift)?-90: 90,0,0));
+            s_rotatingObj.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0, 0));
             // s_rotatingObj.transform.localRotation = Quaternion.Euler(s_rotatingObj.transform.localRotation.eulerAngles + new Vector3(90, 0, 0));
             // s_rotatingObj.attachedParts = parts.RotateX(Input.GetKey(KeyCode.LeftShift));
-        }else if(axis == 1)
+        }
+        else if (axis == 1)
         {
             Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(0,Input.GetKey(KeyCode.LeftShift)?-90: 90,0));
+            s_rotatingObj.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
         }
         else
         {
             Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(0,0,Input.GetKey(KeyCode.LeftShift)?-90: 90));
+            s_rotatingObj.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
         }
     }
     /*private void Update()
