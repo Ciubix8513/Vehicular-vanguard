@@ -29,6 +29,9 @@ public class GizmoRaycaster : MonoBehaviour
             case 1:
                 InputManager.editorMode = EditorMode.rotate;
                 break;
+            case 2:
+                InputManager.editorMode = EditorMode.input;
+                break;
             default:
                 InputManager.editorMode = EditorMode.place;
                 s_rotation.SetActive(false);

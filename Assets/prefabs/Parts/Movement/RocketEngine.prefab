@@ -134,8 +134,16 @@ MonoBehaviour:
     sprite: {fileID: 0}
   health: 10
   m_size: {x: 2, y: 2, z: 2}
+  attachedParts:
+    up: 0
+    down: 0
+    left: 0
+    right: 0
+    forward: 0
+    backward: 0
   parentFace: {x: 0, y: 0, z: 0}
   isRoot: 0
+  Activatable: 1
   isActive: 0
   force: 10
   exhaustDir: {x: 0, y: 0, z: -1}

@@ -10,7 +10,8 @@ public enum Mode
 public enum EditorMode
 {
     place,
-    rotate
+    rotate,
+    input
 }
 
 public class InputManager : MonoBehaviour
@@ -48,6 +49,8 @@ public class InputManager : MonoBehaviour
             PartPlacer.DoEditorRaycast();
         if (mode == Mode.editor && Input.GetMouseButtonDown(0))
             GizmoRaycaster.Raycast();
+        if(mode == Mode.editor && editorMode == EditorMode.input&& Input.GetMouseButtonDown(0))
+            InputMenu.DoRaycast();
         if (mode == Mode.editor && GizmoRaycaster.Rotating && Input.GetMouseButtonUp(0))
             GizmoRaycaster.Rotating = false;
         if (mode == Mode.game && Input.GetKeyDown(Group0))

@@ -16,12 +16,23 @@ MonoBehaviour:
   - _settings:
       _outlineSettings: {fileID: 11400000, guid: 726bfe95cd8f7a7e2bbbaa7e1268e93c,
         type: 2}
-      _outlineColor: {r: 1, g: 0, b: 0, a: 1}
-      _outlineWidth: 18
-      _outlineIntensity: 2
+      _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+      _outlineWidth: 4
+      _outlineIntensity: 1
       _outlineAlphaCutoff: 0.9
-      _outlineMode: 1
+      _outlineMode: 0
     _name: Outline
     _enabled: 1
-    _mergeLayerObjects: 0
-  _ignoreLayerMask: 31
+    _mergeLayerObjects: 1
+  - _settings:
+      _outlineSettings: {fileID: 11400000, guid: 9665e1336bcd3f3eb8113f7a46a3fe75,
+        type: 2}
+      _outlineColor: {r: 1, g: 0, b: 0.6101179, a: 1}
+      _outlineWidth: 4
+      _outlineIntensity: 1
+      _outlineAlphaCutoff: 0.9
+      _outlineMode: 0
+    _name: OutlineSelected
+    _enabled: 1
+    _mergeLayerObjects: 1
+  _ignoreLayerMask: 2147483647

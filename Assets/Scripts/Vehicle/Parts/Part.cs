@@ -89,6 +89,7 @@ public class Part : MonoBehaviour
     public attachments attachedParts;
     public Vector3Int parentFace;
     public bool isRoot;
+    public bool Activatable;
     public bool isActive;
     public void TakeDamage(int dmg)
     {
