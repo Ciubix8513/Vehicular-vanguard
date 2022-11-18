@@ -96,6 +96,7 @@ public class Part : MonoBehaviour
     public void TakeDamage(int dmg)=>health -= dmg;
     public delegate void ActionDel();
     public List<Tuple<ActionDel, string>> GetActions()=> new(){new Tuple<ActionDel, string>(Activate,"Activate"),new Tuple<ActionDel, string>(DeActivate,"Deactivate")};
+    public Dictionary<string,Tuple<KeyCode,int>> binds = new();
     public void Activate() => isActive = true;
     public void DeActivate() => isActive = false;
 }

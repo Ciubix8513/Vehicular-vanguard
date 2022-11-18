@@ -265,6 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: {fileID: 2569682544817489144}
   _keyText: {fileID: 2569682544988805377}
+  _dropdown: {fileID: 2569682543708893145}
+  _downOption: 0
 --- !u!1 &2569682543451958447
 GameObject:
   m_ObjectHideFlags: 0

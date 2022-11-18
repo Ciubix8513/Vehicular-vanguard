@@ -87,7 +87,6 @@ public class UICursor : MonoBehaviour
         partGO.parentFace = SnappingFace * -1;
         SnappingObject.attachedParts[SnappingFace] = true;
         partGO.attachedParts[-SnappingFace] = true;
-        PartGroups.AddToGroup(0,partGO); 
         partGO = null;
     }
 }

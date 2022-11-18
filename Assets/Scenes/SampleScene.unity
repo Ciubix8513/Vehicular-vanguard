@@ -985,7 +985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &701707589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1096,6 +1096,36 @@ MonoBehaviour:
   EditorKey: 98
   Group0: 119
   EditorUI: {fileID: 701707588}
+  OnEditorOpen:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEditorClose:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1952946697}
+        m_TargetAssemblyTypeName: InputMenu, Assembly-CSharp
+        m_MethodName: SaveActions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 912259658}
+        m_TargetAssemblyTypeName: ButtonInvoker, Assembly-CSharp
+        m_MethodName: InvokeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &846452187
 Transform:
   m_ObjectHideFlags: 0
@@ -1161,6 +1191,7 @@ GameObject:
   - component: {fileID: 912259656}
   - component: {fileID: 912259655}
   - component: {fileID: 912259654}
+  - component: {fileID: 912259658}
   m_Layer: 5
   m_Name: Parts
   m_TagString: Untagged
@@ -1212,6 +1243,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1952946697}
+        m_TargetAssemblyTypeName: InputMenu, Assembly-CSharp
+        m_MethodName: SaveActions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1700651783}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -1343,6 +1386,18 @@ RectTransform:
   m_AnchoredPosition: {x: -453.01407, y: 286.89996}
   m_SizeDelta: {x: 160.5718, y: 22.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &912259658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912259653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd659294ffffb504b8456600b226efb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &969734868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1731,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1913,7 +1968,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Part name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2391,7 +2446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Part description
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using System;
+
 public class InputMenu : MonoBehaviour
 {
     //----UI fields----
@@ -19,13 +21,25 @@ public class InputMenu : MonoBehaviour
     private static Camera s_camera;
     private static InputMenu s_this;
     private Part _part = null;
+    private bool _selected;
     void Awake()
     {
         s_camera = Camera.main;
         s_this = this;
     }
-    public void OnMenuOpen() => _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<Part>().Activatable).ToList().ConvertAll(part => { part.layer = 6; return part; });
-    public void OnMenuClose() => _parts.ForEach(part => part.layer = 0);
+    public void OnMenuOpen()
+    {
+        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<Part>().Activatable).ToList().ConvertAll(part => { part.layer = 6; return part; });
+        foreach (Transform c in _actionParent.transform)
+            Destroy(c.gameObject);
+        _nameText.text = _descText.text = "";
+        _selected = false;
+    }
+    public void OnMenuClose()
+    {
+        _parts.ForEach(part => part.layer = 0);
+        _selected = false;
+    }
 
     public static void DoRaycast()
     {
@@ -36,6 +50,9 @@ public class InputMenu : MonoBehaviour
 
     private void LoadData(Part part)
     {
+        if (_selected)
+            SaveActions();
+        _selected = true;
         Debug.Log($"Loading data for part {part.partData.name}");
         if (_part != null)
             _part.gameObject.layer = 6;
@@ -46,8 +63,20 @@ public class InputMenu : MonoBehaviour
 
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
-        _part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a,_part));
+        _part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a, _part));
+        if (_part.binds.Count == 0) return;
+        _part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _part.GetInstanceID()));
+        _part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _part.GetInstanceID()));
+        _part.binds.Clear();
 
+    }
+
+
+    public void SaveActions()
+    {
+
+        foreach (Transform c in _actionParent.transform)
+            c.GetComponent<ActionCell>().Save();
     }
 }
 
