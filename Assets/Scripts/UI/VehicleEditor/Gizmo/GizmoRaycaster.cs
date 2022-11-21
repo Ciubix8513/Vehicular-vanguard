@@ -19,7 +19,6 @@ public class GizmoRaycaster : MonoBehaviour
         s_rotation.SetActive(false);
     }
     public static void HideGizmo() => s_rotation.SetActive(false);
-
     public void SwitchMode(int mode)
     {
         Rotating = false;
@@ -38,7 +37,6 @@ public class GizmoRaycaster : MonoBehaviour
                 break;
         }
     }
-
     public static void Raycast()
     {
         if (InputManager.editorMode != EditorMode.rotate) return;
@@ -49,7 +47,7 @@ public class GizmoRaycaster : MonoBehaviour
             s_rotation.transform.position = hit.collider.transform.position;
             s_rotation.transform.rotation = hit.collider.transform.rotation;
             s_rotation.SetActive(true);
-            s_rotatingObj = hit.collider.GetComponent<Part>();
+            s_rotatingObj = hit.collider.GetComponent<PartProxy>().part;
             s_originalRotation = s_rotatingObj.transform.localRotation;
             s_originalAttachments = s_rotatingObj.attachedParts;
             return;
@@ -94,40 +92,4 @@ public class GizmoRaycaster : MonoBehaviour
             s_rotatingObj.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
         }
     }
-    /*private void Update()
-    {
-        if (!Rotating) return;
-        s_delta += Input.GetAxis(s_axis == 1 ? "Mouse X" : "Mouse Y");
-        if (s_axis == 0)
-        {
-            //X axis
-            var num = ((int)s_delta / 15) % 4 * (int)Mathf.Sign(s_delta);
-            attachments attachments = s_originalAttachments;
-            for (int i = 0; i < 4 + num; i++)
-                attachments = attachments.RotateX();
-            // s_rotatingObj.attachedParts = attachments;
-            s_rotatingObj.transform.localRotation = Quaternion.Euler(s_originalRotation.eulerAngles + new Vector3(90.0f * (((int)s_delta) / 15), 0, 0));
-        }
-        else if (s_axis == 1)
-        {
-            //Y axis
-            var num = ((int)s_delta / 15) % 4 * (int)Mathf.Sign(s_delta);
-            attachments attachments = s_originalAttachments;
-            for (int i = 0; i < 4 + num; i++)
-                attachments = attachments.RotateY();
-            // s_rotatingObj.attachedParts = attachments;
-            s_rotatingObj.transform.localRotation = Quaternion.Euler(s_originalRotation.eulerAngles + new Vector3(0, 90.0f * (((int)s_delta) / 15), 0));
-        }
-        else
-        {
-            //Z axis
-            var num = ((int)s_delta / 15) % 4 * (int)Mathf.Sign(s_delta);
-            attachments attachments = s_originalAttachments;
-            for (int i = 0; i < 4 + num; i++)
-                attachments = attachments.RotateZ();
-            // s_rotatingObj.attachedParts = attachments;
-            s_rotatingObj.transform.localRotation = Quaternion.Euler(s_originalRotation.eulerAngles + new Vector3(0, 0, 90.0f * num));
-
-        }
-    }*/
 }

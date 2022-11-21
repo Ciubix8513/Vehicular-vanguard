@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
-using System;
 
 public class InputMenu : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class InputMenu : MonoBehaviour
     TextMeshProUGUI _descText;
 
     //----UI fields----
-    private List<GameObject> _parts;
+    private List<GameObject> _parts = new();
     private static Camera s_camera;
     private static InputMenu s_this;
     private Part _part = null;
@@ -29,7 +28,7 @@ public class InputMenu : MonoBehaviour
     }
     public void OnMenuOpen()
     {
-        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<Part>().Activatable).ToList().ConvertAll(part => { part.layer = 6; return part; });
+        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { part.layer = 6; return part; });
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
         _nameText.text = _descText.text = "";
@@ -40,24 +39,22 @@ public class InputMenu : MonoBehaviour
         _parts.ForEach(part => part.layer = 0);
         _selected = false;
     }
-
     public static void DoRaycast()
     {
         if (!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f, 1 << 6)) return;
         if (!hit.collider.CompareTag("Part")) return;
-        s_this.LoadData(hit.collider.GetComponent<Part>());
+        s_this.LoadData(hit.collider.GetComponent<PartProxy>());
     }
-
-    private void LoadData(Part part)
+    private void LoadData(PartProxy part)
     {
         if (_selected)
             SaveActions();
         _selected = true;
-        Debug.Log($"Loading data for part {part.partData.name}");
+        Debug.Log($"Loading data for part {part.part.partData.name}");
         if (_part != null)
             _part.gameObject.layer = 6;
-        _part = part;
-        _part.gameObject.layer = 9;
+        _part = part.part;
+        part.gameObject.layer = 9;
         _nameText.text = _part.partData.name;
         _descText.text = _part.partData.description;
 
@@ -70,8 +67,6 @@ public class InputMenu : MonoBehaviour
         _part.binds.Clear();
 
     }
-
-
     public void SaveActions()
     {
 

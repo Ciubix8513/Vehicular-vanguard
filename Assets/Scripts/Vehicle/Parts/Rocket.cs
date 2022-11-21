@@ -12,10 +12,9 @@ public class Rocket : Part
     private void Awake() {
         _rb = GetComponent<Rigidbody>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (isActive)
             _rb.AddForceAtPosition(transform.rotation * (Vector3)exhaustDir  * force,transform.position,ForceMode.Force);
-
     }
 }

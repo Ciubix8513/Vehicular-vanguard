@@ -6,11 +6,9 @@ using UnityEngine.UI;
 
 public class UICursor : MonoBehaviour
 {
-
     static TextMeshProUGUI text;
     static Image image;
     public static bool isDragging = false;
-
     static PartData partData;
     public static Part partGO;
     public static Part SnappingObject;
@@ -58,6 +56,15 @@ public class UICursor : MonoBehaviour
         if (isDragging)
             image.transform.position = Input.mousePosition;
     }
+    public static void SetLayer(Transform t, int layer)
+    {
+        t.gameObject.layer = layer;
+        foreach (Transform c in t)
+            // if (c.childCount > 0)
+            if(c.gameObject.layer != 10)
+                SetLayer(c, layer);
+        
+    }
     public static void StartDragging(PartData data)
     {
         partData = data;
@@ -66,7 +73,9 @@ public class UICursor : MonoBehaviour
         image.gameObject.SetActive(true);
         partGO = Instantiate(data.prefab, Vector3.zero, Quaternion.identity).GetComponent<Part>();
         partGO.partData = partData;
-        partGO.gameObject.layer = 2;
+        // ?partGO.gameObject.layer = 2;
+        SetLayer(partGO.transform, 2);
+
         partGO.gameObject.SetActive(false);
     }
 
@@ -76,7 +85,8 @@ public class UICursor : MonoBehaviour
             Destroy(partGO.gameObject);
         isDragging = false;
         image.gameObject.SetActive(false);
-        partGO.gameObject.layer = 0;
+        // partGO.gameObject.layer = 0;
+        SetLayer(partGO.transform,0);
         if (SnappingObject == null)
         {
             Destroy(partGO.GetComponent<FixedJoint>());
@@ -85,6 +95,7 @@ public class UICursor : MonoBehaviour
         partGO.gameObject.AddComponent<FixedJoint>().connectedBody = SnappingObject.GetComponent<Rigidbody>();
         partGO.transform.parent = SnappingObject.transform.parent;
         partGO.parentFace = SnappingFace * -1;
+        partGO.parentPart = SnappingObject;
         SnappingObject.attachedParts[SnappingFace] = true;
         partGO.attachedParts[-SnappingFace] = true;
         partGO = null;

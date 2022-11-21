@@ -7,7 +7,6 @@ public class PartPlacer : MonoBehaviour
     {
         camera = Camera.main;
     }
-
     public static void DoEditorRaycast()
     {
         RaycastHit hit;
@@ -16,13 +15,13 @@ public class PartPlacer : MonoBehaviour
         if (!hit.collider.CompareTag("Part"))
             return;
         Debug.Log($"Should be dragging {hit.collider.gameObject.name}");
-        var p = hit.collider.GetComponent<Part>();
+        var p = hit.collider.GetComponent<PartProxy>().part;
         if (p.isRoot) return;
         UICursor.isDragging = true;
         UICursor.partGO = p;
         if (UICursor.partGO.transform.parent != null)
         {
-            UICursor.partGO.transform.parent.GetComponent<Part>().attachedParts[-UICursor.partGO.parentFace] = false;
+            UICursor.partGO.parentPart.attachedParts[-UICursor.partGO.parentFace] = false;
             UICursor.partGO.attachedParts[UICursor.partGO.parentFace] = false;
             UICursor.partGO.GetComponent<FixedJoint>().connectedBody = null;
         }
@@ -45,7 +44,7 @@ public class PartPlacer : MonoBehaviour
             UICursor.SnappingObject = null;
             return;
         }
-        Part part = hit.collider.GetComponent<Part>();
+        Part part = hit.collider.GetComponent<PartProxy>().part;
         UICursor.SnappingObject = part;
         var p = hit.collider.transform.InverseTransformPoint(hit.point).normalized;
         bool ValidTargeting = false;

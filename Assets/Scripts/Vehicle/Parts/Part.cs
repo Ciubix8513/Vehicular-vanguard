@@ -90,13 +90,14 @@ public class Part : MonoBehaviour
     public Vector3 m_size;
     public attachments attachedParts;
     public Vector3Int parentFace;
+    public Part parentPart;
     public bool isRoot;
     public bool Activatable;
     public bool isActive;
     public void TakeDamage(int dmg)=>health -= dmg;
     public delegate void ActionDel();
-    public List<Tuple<ActionDel, string>> GetActions()=> new(){new Tuple<ActionDel, string>(Activate,"Activate"),new Tuple<ActionDel, string>(DeActivate,"Deactivate")};
+    public virtual List<Tuple<ActionDel, string>> GetActions()=> new(){new Tuple<ActionDel, string>(Activate,"Activate"),new Tuple<ActionDel, string>(DeActivate,"Deactivate")};
     public Dictionary<string,Tuple<KeyCode,int>> binds = new();
-    public void Activate() => isActive = true;
-    public void DeActivate() => isActive = false;
+    public virtual void Activate() => isActive = true;
+    public virtual void DeActivate() => isActive = false;
 }
