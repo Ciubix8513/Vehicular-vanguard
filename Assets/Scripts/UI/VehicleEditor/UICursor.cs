@@ -83,7 +83,7 @@ public class UICursor : MonoBehaviour
         if (!PartGO.gameObject.activeSelf)
         {
             Debug.Log($"Destroying {PartGO.gameObject.name}, num binds = {PartGO.binds.Count}, instance id = {PartGO.GetInstanceID()}");
-            PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x =>   PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
+            PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
             PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
             Destroy(PartGO.gameObject);
         }

@@ -44,6 +44,7 @@ public class InputManager : MonoBehaviour
             EditorUI.SetActive(false);
             Time.timeScale = 1;
             OnEditorClose.Invoke();
+            editorMode = EditorMode.place;
             return;
         }
         mode = Mode.editor;
@@ -69,7 +70,7 @@ public class InputManager : MonoBehaviour
             InputMenu.DoRaycast();
         if (mode == Mode.editor && GizmoRaycaster.Rotating && Input.GetMouseButtonUp(0))
             GizmoRaycaster.Rotating = false;
-        if (mode == Mode.game)
+        if (mode == Mode.game && !Input.GetMouseButton(1))
         {
             PartGroups.DownGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel,int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
             PartGroups.UpGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel,int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });

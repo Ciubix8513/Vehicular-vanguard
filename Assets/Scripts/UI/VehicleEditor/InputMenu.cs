@@ -21,7 +21,7 @@ public class InputMenu : MonoBehaviour
     private static InputMenu s_this;
     private PartProxy _partProxy = null;
     private bool _selected;
-    private Dictionary<int,int> _originalLayers;
+    private Dictionary<int, int> _originalLayers;
     void Awake()
     {
         s_camera = Camera.main;
@@ -30,7 +30,7 @@ public class InputMenu : MonoBehaviour
     public void OnMenuOpen()
     {
         _originalLayers = new();
-        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => {_originalLayers.Add(part.GetInstanceID(), part.layer) ; part.layer = 6;return part; });
+        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { _originalLayers.Add(part.GetInstanceID(), part.layer); part.layer = 6; return part; });
 
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
@@ -39,7 +39,7 @@ public class InputMenu : MonoBehaviour
     }
     public void OnMenuClose()
     {
-        _parts.Where(x=> x != null).ToList().ForEach( part => part.layer = _originalLayers[part.GetInstanceID()]);
+        _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
         _selected = false;
     }
     public static void DoRaycast()
@@ -73,8 +73,10 @@ public class InputMenu : MonoBehaviour
     }
     public void SaveActions()
     {
+        if (InputManager.editorMode != EditorMode.input) return;
         foreach (Transform c in _actionParent.transform)
             c.GetComponent<ActionCell>().Save();
+
     }
 }
 
