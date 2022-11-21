@@ -129,7 +129,7 @@ MonoBehaviour:
   parentFace: {x: 0, y: 0, z: 0}
   parentPart: {fileID: 0}
   isRoot: 0
-  Activatable: 1
+  Activatable: 0
   isActive: 0
 --- !u!54 &4881350803425773671
 Rigidbody:

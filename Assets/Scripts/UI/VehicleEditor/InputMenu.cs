@@ -19,8 +19,9 @@ public class InputMenu : MonoBehaviour
     private List<GameObject> _parts = new();
     private static Camera s_camera;
     private static InputMenu s_this;
-    private Part _part = null;
+    private PartProxy _partProxy = null;
     private bool _selected;
+    private Dictionary<int,int> _originalLayers;
     void Awake()
     {
         s_camera = Camera.main;
@@ -28,7 +29,9 @@ public class InputMenu : MonoBehaviour
     }
     public void OnMenuOpen()
     {
-        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { part.layer = 6; return part; });
+        _originalLayers = new();
+        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => {_originalLayers.Add(part.GetInstanceID(), part.layer) ; part.layer = 6;return part; });
+
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
         _nameText.text = _descText.text = "";
@@ -36,7 +39,7 @@ public class InputMenu : MonoBehaviour
     }
     public void OnMenuClose()
     {
-        _parts.ForEach(part => part.layer = 0);
+        _parts.Where(x=> x != null).ToList().ForEach( part => part.layer = _originalLayers[part.GetInstanceID()]);
         _selected = false;
     }
     public static void DoRaycast()
@@ -51,25 +54,25 @@ public class InputMenu : MonoBehaviour
             SaveActions();
         _selected = true;
         Debug.Log($"Loading data for part {part.part.partData.name}");
-        if (_part != null)
-            _part.gameObject.layer = 6;
-        _part = part.part;
+        if (_partProxy != null)
+            _partProxy.gameObject.layer = 6;
+        _partProxy = part;
         part.gameObject.layer = 9;
-        _nameText.text = _part.partData.name;
-        _descText.text = _part.partData.description;
+        _nameText.text = _partProxy.part.partData.name;
+        _descText.text = _partProxy.part.partData.description;
 
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
-        _part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a, _part));
-        if (_part.binds.Count == 0) return;
-        _part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _part.GetInstanceID()));
-        _part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _part.GetInstanceID()));
-        _part.binds.Clear();
+        _partProxy.part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a, _partProxy.part));
+        if (_partProxy.part.binds.Count == 0) return;
+        // PartGroups.RemoveReferences(_part.GetInstanceID());
+        _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
+        _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
+        _partProxy.part.binds.Clear();
 
     }
     public void SaveActions()
     {
-
         foreach (Transform c in _actionParent.transform)
             c.GetComponent<ActionCell>().Save();
     }

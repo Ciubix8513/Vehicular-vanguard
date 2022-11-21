@@ -17,7 +17,7 @@ public class PartCell : MonoBehaviour
         //       Debug.Log($"Exited on {partData.name}");
         UICursor.DisableNameCursor();
         //Assume dragging
-        if (Input.GetMouseButton(0)&&!UICursor.isDragging&&InputManager.editorMode == EditorMode.place)
+        if (Input.GetMouseButton(0)&&!UICursor.IsDragging&&InputManager.editorMode == EditorMode.place)
             UICursor.StartDragging(d);
 
 

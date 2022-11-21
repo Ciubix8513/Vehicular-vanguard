@@ -67,7 +67,6 @@ public struct attachments
         }
         set
         {
-
             if (i == Vector3Int.right)
                 right = value;
             else if (i == Vector3Int.left)

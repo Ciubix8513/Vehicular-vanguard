@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6157291727318883836}
   - component: {fileID: 8426809034198889785}
   - component: {fileID: 3308254846168007054}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Part
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015615673158903313}
-  m_LocalRotation: {x: -0.5, y: -0.49999997, z: 0.5, w: 0.50000006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964337896242465118}
   - component: {fileID: 2346294661115076249}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WheelCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3271343275684881877}
   m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 1
+  m_Radius: 1.1
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -256,6 +256,12 @@ MonoBehaviour:
   isRoot: 0
   Activatable: 1
   isActive: 0
-  wheel: {fileID: 0}
-  HasMotor: 0
-  CanSteer: 0
+  _wheelMesh: {fileID: 1692867630582437547}
+  WheelCollider: {fileID: 2346294661115076249}
+  HasMotor: 1
+  CanSteer: 1
+  LeftMax: 45
+  RightMax: -45
+  TurningSpeed: 0.1
+  MaxTorque: 20000
+  Acceleration: 0.1

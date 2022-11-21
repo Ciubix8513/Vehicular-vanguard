@@ -20,6 +20,7 @@ public class ActionCell : MonoBehaviour
         Name.text = tuple.Item2;
         del = tuple.Item1;
         _part = p;
+        // Debug.Log($"Provided part Instance ID =  {p.GetInstanceID()}");
         if (p.binds.Count == 0) return;
         _key = p.binds[tuple.Item2].Item1;
         _dropdown.value = p.binds[tuple.Item2].Item2;

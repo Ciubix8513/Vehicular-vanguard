@@ -51,13 +51,17 @@ public class InputManager : MonoBehaviour
         Time.timeScale = 0;
         OnEditorOpen.Invoke();
     }
+    void Start()
+    {
+        ProcessEK();
+    }
     void Update()
     {        
         if (Input.GetKeyDown(KeyCode.B))
             ProcessEK();
-        if (UICursor.isDragging && Input.GetMouseButtonUp(0))
+        if (UICursor.IsDragging && Input.GetMouseButtonUp(0))
             UICursor.EndDragging();
-        if (!UICursor.isDragging && Input.GetMouseButtonDown(0) && mode == Mode.editor && editorMode == EditorMode.place)
+        if (!UICursor.IsDragging && Input.GetMouseButtonDown(0) && mode == Mode.editor && editorMode == EditorMode.place)
             PartPlacer.DoEditorRaycast();
         if (mode == Mode.editor && Input.GetMouseButtonDown(0))
             GizmoRaycaster.Raycast();
