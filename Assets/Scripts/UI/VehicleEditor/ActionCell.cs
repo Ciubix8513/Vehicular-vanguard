@@ -15,17 +15,18 @@ public class ActionCell : MonoBehaviour
     [SerializeField]
     int _downOption;
 
-    public void Init(System.Tuple<Part.ActionDel, string> tuple, Part p)
+    public void Init(System.Tuple<Part.ActionDel, string,KeyCode,int> tuple, Part p)
     {
         Name.text = tuple.Item2;
         del = tuple.Item1;
+        _key = tuple.Item3;
+        _dropdown.value = tuple.Item4;
         _part = p;
-        // Debug.Log($"Provided part Instance ID =  {p.GetInstanceID()}");
+        _keyText.text = _key.ToString();
         if (p.binds.Count == 0) return;
         _key = p.binds[tuple.Item2].Item1;
         _dropdown.value = p.binds[tuple.Item2].Item2;
         _keyText.text = _key.ToString();
-        // p.binds.Clear();
     }
 
     public void GetKey() => StartCoroutine(getKey());
