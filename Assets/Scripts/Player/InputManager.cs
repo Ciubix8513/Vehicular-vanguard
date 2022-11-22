@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Cinemachine;
 
 [System.Serializable]
 public enum Mode
@@ -33,6 +34,11 @@ public class InputManager : MonoBehaviour
     private UnityEvent OnEditorOpen = new();
     [SerializeField]
     private UnityEvent OnEditorClose = new();
+
+    [SerializeField]
+    private CinemachineVirtualCamera _editorCamera;
+    [SerializeField]
+    private Transform _mainCamera;
     void ProcessEK()
     {
         Debug.Log("Processing Editor key");
@@ -45,19 +51,25 @@ public class InputManager : MonoBehaviour
             Time.timeScale = 1;
             OnEditorClose.Invoke();
             editorMode = EditorMode.place;
+            _editorCamera.Priority = 0;
+            Cursor.lockState = CursorLockMode.Locked;
             return;
         }
+        _editorCamera.transform.position = _mainCamera.transform.position;
+        _editorCamera.transform.rotation = _mainCamera.transform.rotation;
+        _editorCamera.Priority = 100;
         mode = Mode.editor;
         EditorUI.SetActive(true);
         Time.timeScale = 0;
         OnEditorOpen.Invoke();
+        Cursor.lockState = CursorLockMode.None;
     }
     void Start()
     {
         ProcessEK();
     }
     void Update()
-    {        
+    {
         if (Input.GetKeyDown(KeyCode.B))
             ProcessEK();
         if (UICursor.IsDragging && Input.GetMouseButtonUp(0))
@@ -72,8 +84,8 @@ public class InputManager : MonoBehaviour
             GizmoRaycaster.Rotating = false;
         if (mode == Mode.game && !Input.GetMouseButton(1))
         {
-            PartGroups.DownGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel,int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
-            PartGroups.UpGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel,int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
+            PartGroups.DownGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel, int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
+            PartGroups.UpGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel, int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
         }
     }
 

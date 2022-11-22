@@ -6,13 +6,10 @@ public class EditorCamera : MonoBehaviour
 {
     public float MouseSensitivity = 1.0f;
     public float speed = 0.01f;
-    void Start()
-    {
-        // Cursor.lockState = CursorLockMode.Locked;
-    }
-
     void Update()
     {
+        if(InputManager.mode != Mode.editor)
+            return;
         if (Input.GetButtonDown("Fire2"))
             Cursor.lockState = CursorLockMode.Locked;
         if (Cursor.lockState != CursorLockMode.Locked)

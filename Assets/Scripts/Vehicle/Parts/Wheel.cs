@@ -26,13 +26,19 @@ public class Wheel : Part
         _targetTorque = MaxTorque;
         WheelCollider.brakeTorque = 0.0f;
     }
-
     public override void DeActivate()
     {
         _targetTorque = 0;
         WheelCollider.motorTorque = 0;
         WheelCollider.brakeTorque = 20.0f;
     }
+    public bool CanBreak = false;
+    public float MaxBreakTorque = 100.0f;
+    [SerializeField]
+    private float _breakAcceleration = .1f; 
+    private float _targetBreak;
+    public void StartBreak()=>_targetBreak = MaxBreakTorque;
+    public void StopBreak() => _targetBreak = 0.0f;
     public override List<Tuple<ActionDel, string>> GetActions()
     {
         List<Tuple<ActionDel, string>> o = new();
@@ -48,12 +54,18 @@ public class Wheel : Part
             o.Add(new(Activate, "Turn on motor"));
             o.Add(new(DeActivate, "Turn off motor"));
         }
+        if(CanBreak)
+        {
+            o.Add(new(StartBreak,"Turn on breaks"));
+            o.Add(new(StopBreak,"Turn off breaks"));
+        }
         return o;
     }
     private void FixedUpdate()
     {
         WheelCollider.steerAngle = Mathf.Lerp(WheelCollider.steerAngle, _targetAngle, TurningSpeed);
         WheelCollider.motorTorque = Mathf.Lerp(WheelCollider.motorTorque, _targetTorque, Acceleration);
+        WheelCollider.brakeTorque = Mathf.Lerp(WheelCollider.brakeTorque,_targetBreak,_breakAcceleration);
         Debug.Log($"Motor torque:{WheelCollider.motorTorque}");
         WheelCollider.GetWorldPose(out var pos, out var rot);
         _wheelMesh.position = pos;
