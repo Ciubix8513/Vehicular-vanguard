@@ -8,9 +8,18 @@ public class Rocket : Part
     private Rigidbody _rb;
     public float force = 10.0f;
     public Vector3Int exhaustDir;
-
-    private void Awake() {
-        _rb = GetComponent<Rigidbody>();
+    [SerializeField]
+    private GameObject _exhaust;
+    private void Awake()=>_rb = GetComponent<Rigidbody>();
+    public override void Activate()
+    {
+        base.Activate();
+        _exhaust.SetActive(true);
+    }
+    public override void DeActivate()
+    {
+        base.DeActivate();
+        _exhaust.SetActive(false);
     }
     private void FixedUpdate()
     {

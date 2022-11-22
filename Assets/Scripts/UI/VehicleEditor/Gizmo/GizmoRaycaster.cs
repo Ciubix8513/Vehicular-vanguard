@@ -9,9 +9,10 @@ public class GizmoRaycaster : MonoBehaviour
     [SerializeField]
     private GameObject _rotationPrefab;
     private static int s_axis;
-    private static Part s_rotatingObj;
+    private static PartProxy s_rotatingObj;
     private static Quaternion s_originalRotation;
     private static attachments s_originalAttachments;
+    private static int s_oldLayer;
     private void Awake()
     {
         s_camera = Camera.main;
@@ -22,14 +23,16 @@ public class GizmoRaycaster : MonoBehaviour
     public void SwitchMode(int mode)
     {
         Rotating = false;
+        if (s_rotatingObj!= null)
+            s_rotatingObj.gameObject.layer = s_oldLayer;
         switch (mode)
         {
-            //Rotation
             case 1:
                 InputManager.editorMode = EditorMode.rotate;
                 break;
             case 2:
                 InputManager.editorMode = EditorMode.input;
+                s_rotation.SetActive(false);
                 break;
             default:
                 InputManager.editorMode = EditorMode.place;
@@ -44,19 +47,22 @@ public class GizmoRaycaster : MonoBehaviour
 
         if (hit.collider.CompareTag("Part"))
         {
+            if (s_rotatingObj != null)
+                s_rotatingObj.gameObject.layer = s_oldLayer;
+            s_oldLayer = hit.collider.gameObject.layer;
+            hit.collider.gameObject.layer = 2;
             s_rotation.transform.position = hit.collider.transform.position;
             s_rotation.transform.rotation = hit.collider.transform.rotation;
             s_rotation.SetActive(true);
-            s_rotatingObj = hit.collider.GetComponent<PartProxy>().part;
-            s_originalRotation = s_rotatingObj.transform.localRotation;
-            s_originalAttachments = s_rotatingObj.attachedParts;
+            s_rotatingObj = hit.collider.GetComponent<PartProxy>();
+            s_originalRotation = s_rotatingObj.part.transform.localRotation;
+            s_originalAttachments = s_rotatingObj.part.attachedParts;
             return;
         }
         if (!hit.collider.CompareTag("Gizmo")) return;
-        Debug.Log($"Targeting {hit.collider.name}");
         Rotating = true;
         s_delta = 0;
-        s_originalRotation = s_rotatingObj.transform.localRotation;
+        s_originalRotation = s_rotatingObj.part.transform.localRotation;
         if (hit.collider.name.ToLower() == "x")
             s_axis = 0;
         else if (hit.collider.name.ToLower() == "y")
@@ -67,29 +73,13 @@ public class GizmoRaycaster : MonoBehaviour
     }
     static void Rotate(int axis)
     {
-        var parts = s_rotatingObj.attachedParts;
-        parts[s_rotatingObj.parentFace] = false;
+        var parts = s_rotatingObj.part.attachedParts;
+        parts[s_rotatingObj.part.parentFace] = false;
         if (axis == 0)
-        {
-            // if (parts.RotateX(Input.GetKey(KeyCode.LeftShift))[s_rotatingObj.parentFace])
-            // {
-            // Debug.Log("Blocked rotation");
-            // return;
-            // }
-            Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0, 0));
-            // s_rotatingObj.transform.localRotation = Quaternion.Euler(s_rotatingObj.transform.localRotation.eulerAngles + new Vector3(90, 0, 0));
-            // s_rotatingObj.attachedParts = parts.RotateX(Input.GetKey(KeyCode.LeftShift));
-        }
+            s_rotatingObj.part.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0, 0));
         else if (axis == 1)
-        {
-            Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
-        }
+            s_rotatingObj.part.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
         else
-        {
-            Debug.Log(Input.GetKey(KeyCode.LeftShift));
-            s_rotatingObj.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
-        }
+            s_rotatingObj.part.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
     }
 }

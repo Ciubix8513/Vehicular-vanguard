@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5568d42490da24a13b4e01f0417ac073, type: 3}
-  m_Name: SteeringMotorWheel
+  m_Name: UniversalWheel
   m_EditorClassIdentifier: 
   data:
     name: Universal wheel
     description: A wheel with both steering and an in built motor
-    prefab: {fileID: 3870699613029858390, guid: 24c3510dd09cda607b5c2e8ad1d8ddb5,
+    prefab: {fileID: 3870699613029858390, guid: 8d203d623bdd38646aae1bd27786cfd0,
       type: 3}
     sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
