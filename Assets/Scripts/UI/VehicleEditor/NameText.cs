@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class NameText : MonoBehaviour
 {
     [SerializeField]
-    Vector3 offset = Vector3.zero;
-
-    void Update()
-    {
-        transform.position = Input.mousePosition + offset;
-    }
+    private Vector3 _offset = new(100,0,0);
+    void Update()=>transform.position = Input.mousePosition + _offset;
 }

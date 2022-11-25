@@ -14,7 +14,6 @@ public class ActionCell : MonoBehaviour
     private Part _part;
     [SerializeField]
     int _downOption;
-
     public void Init(System.Tuple<Part.ActionDel, string,KeyCode,int> tuple, Part p)
     {
         Name.text = tuple.Item2;

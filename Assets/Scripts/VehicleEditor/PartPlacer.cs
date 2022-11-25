@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PartPlacer : MonoBehaviour
 {
-    static Camera camera;
+    static Camera s_camera;
     private void Start()
     {
-        camera = Camera.main;
+        s_camera = Camera.main;
     }
     public static void DoEditorRaycast()
     {
         RaycastHit hit;
-        if (!Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100.0f))
+        if (!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition), out hit, 100.0f))
             return;
         if (!hit.collider.CompareTag("Part"))
             return;
@@ -32,7 +32,7 @@ public class PartPlacer : MonoBehaviour
     {
         if (!UICursor.IsDragging)
             return;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = s_camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit, 100.0f))
             return;

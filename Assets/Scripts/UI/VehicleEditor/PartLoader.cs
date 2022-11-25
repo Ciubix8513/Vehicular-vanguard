@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +6,7 @@ public class PartLoader : MonoBehaviour
     public GameObject CellPrefab;
     public RectTransform cellParent;
 
-    void Start()
-    {
-        LoadParts("parts/Structure");
-    }
+    void Start()=>LoadParts("parts/Structure");
     void LoadParts(string Directory)
     {
         var parts = Resources.LoadAll<PartScriptable>(Directory);

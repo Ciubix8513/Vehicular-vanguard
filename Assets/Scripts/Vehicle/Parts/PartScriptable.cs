@@ -10,6 +10,7 @@ public class PartData
     public Sprite sprite;
     
 }
+
 [CreateAssetMenu(fileName = "Part", menuName = "SOs/Part", order = 0)]
 public class PartScriptable : ScriptableObject
 {

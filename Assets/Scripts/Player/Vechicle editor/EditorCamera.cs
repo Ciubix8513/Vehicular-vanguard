@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EditorCamera : MonoBehaviour
@@ -25,6 +23,5 @@ public class EditorCamera : MonoBehaviour
             (Input.GetKey(KeyCode.E) == true ? 1 : 0) - (Input.GetKey(KeyCode.Q) == true ? 1 : 0),
             (Input.GetKey(KeyCode.W) == true ? 1 : 0) - (Input.GetKey(KeyCode.S) == true ? 1 : 0));
         transform.localPosition += transform.rotation * inp * speed * Time.unscaledDeltaTime * (Input.GetKey(KeyCode.LeftShift) == true ? 2 : 1);
-
     }
 }
