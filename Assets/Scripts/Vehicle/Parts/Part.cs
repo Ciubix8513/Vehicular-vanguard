@@ -12,41 +12,6 @@ public struct attachments
     public bool right;
     public bool forward;
     public bool backward;
-    public attachments RotateX(bool minus)
-    {
-        if(minus)
-        {
-            var o1 = this;
-            o1.RotateX(false);
-            o1.RotateX(false);
-            o1.RotateX(false);
-            return o1;
-        }
-        var o = this;
-        o.up = this.backward;
-        o.down = this.forward;
-        o.backward = this.up;
-        o.forward = this.up;
-        return o;
-    }
-    public attachments RotateY()
-    {
-        var o = this;
-        o.forward = this.left;
-        o.backward = this.right;
-        o.left = this.forward;
-        o.right = this.backward;
-        return o;
-    }
-    public attachments RotateZ()
-    {
-        var o = this;
-        o.up = this.left;
-        o.down = this.right;
-        o.right = this.up;
-        o.left = this.down;
-        return o;
-    }
     public bool this[Vector3Int i]
     {
         get

@@ -66,7 +66,8 @@ public class InputManager : MonoBehaviour
     }
     void Start()
     {
-        ProcessEK();
+        if(mode != Mode.editor)
+            ProcessEK();
     }
     void Update()
     {

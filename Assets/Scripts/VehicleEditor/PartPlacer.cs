@@ -26,8 +26,9 @@ public class PartPlacer : MonoBehaviour
             UICursor.PartGO.GetComponent<FixedJoint>().connectedBody = null;
         }
         UICursor.PartGO.transform.parent = null;
-        UICursor.SetLayer(UICursor.PartGO.transform,2);
+        UICursor.SetLayer(UICursor.PartGO.transform, 2);
     }
+    //TODO pull out the stuff into separate functions 
     private void Update()
     {
         if (!UICursor.IsDragging)
@@ -38,8 +39,8 @@ public class PartPlacer : MonoBehaviour
             return;
         if (!hit.collider.CompareTag("Part"))
         {
-
-            UICursor.PartGO.transform.rotation = Quaternion.LookRotation(Vector3.forward,hit.normal);
+            //TODO Fix part not rotating correctly
+            UICursor.PartGO.transform.rotation = Quaternion.LookRotation(Vector3.forward, hit.normal);
             UICursor.PartGO.transform.position = hit.point + Vector3.up * UICursor.PartGO.m_size.y / 2;
             UICursor.SnappingObject = null;
             return;
