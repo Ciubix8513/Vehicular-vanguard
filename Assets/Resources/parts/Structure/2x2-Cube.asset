@@ -18,3 +18,4 @@ MonoBehaviour:
     prefab: {fileID: 1678200615871335973, guid: 4dbadc8241c7011abb821f6b560a0b5f,
       type: 3}
     sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    ID: Ciubix:2x2-cube

@@ -8,7 +8,7 @@ public class PartData
     public string description;
     public GameObject prefab;
     public Sprite sprite;
-    
+    public string ID;
 }
 
 [CreateAssetMenu(fileName = "Part", menuName = "SOs/Part", order = 0)]
