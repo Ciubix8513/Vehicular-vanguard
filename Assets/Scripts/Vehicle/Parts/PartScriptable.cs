@@ -9,6 +9,7 @@ public class PartData
     public GameObject prefab;
     public Sprite sprite;
     public string ID;
+    public bool ExcludeFromBuildMenu;
 }
 
 [CreateAssetMenu(fileName = "Part", menuName = "SOs/Part", order = 0)]

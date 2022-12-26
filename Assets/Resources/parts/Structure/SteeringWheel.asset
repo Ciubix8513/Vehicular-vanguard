@@ -19,3 +19,4 @@ MonoBehaviour:
       type: 3}
     sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     ID: Ciubix:Rotating-Wheel
+    ExcludeFromBuildMenu: 0

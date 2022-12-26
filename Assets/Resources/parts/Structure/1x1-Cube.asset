@@ -17,5 +17,6 @@ MonoBehaviour:
     description: Just a structure cube
     prefab: {fileID: 1678200615871335973, guid: a5c3fb281262d43a8be22a31e31f83c8,
       type: 3}
-    sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     ID: Ciubix:1x1-Cube
+    ExcludeFromBuildMenu: 0

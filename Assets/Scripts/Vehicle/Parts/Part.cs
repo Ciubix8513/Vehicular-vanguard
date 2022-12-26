@@ -49,7 +49,10 @@ public struct attachments
 }
 public class Part : MonoBehaviour
 {
+    [SerializeField]
+    private PartScriptable partScriptable;
     public PartData partData;
+    // public int Id;
     public int health;
     public Vector3 m_size;
     public attachments attachedParts;
@@ -58,11 +61,13 @@ public class Part : MonoBehaviour
     public bool isRoot;
     public bool Activatable;
     public bool isActive;
-    public void TakeDamage(int dmg)=>health -= dmg;
+    public void TakeDamage(int dmg) => health -= dmg;
     public delegate void ActionDel();
-    public virtual List<Tuple<ActionDel, string,KeyCode,int>> GetActions()=> 
-    new(){new (Activate,"Activate",KeyCode.W,0),new (DeActivate,"Deactivate",KeyCode.W,1)};
-    public Dictionary<string,Tuple<KeyCode,int>> binds = new();
+    public virtual List<Tuple<ActionDel, string, KeyCode, int>> GetActions() =>
+    new() { new(Activate, "Activate", KeyCode.W, 0), new(DeActivate, "Deactivate", KeyCode.W, 1) };
+    public Dictionary<string, Tuple<KeyCode, int>> binds = new();
     public virtual void Activate() => isActive = true;
     public virtual void DeActivate() => isActive = false;
+
+    void Awake() => partData = partScriptable?.data;
 }
