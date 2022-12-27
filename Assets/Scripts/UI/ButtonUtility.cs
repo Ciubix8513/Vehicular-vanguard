@@ -9,4 +9,8 @@ public class ButtonUtility : MonoBehaviour
     public void TestSaving() => VehicleSaver.SaveVehicle(
         VehicleSaver.SerializeVehicle(FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First()),
         "test");
+    public void TestLoading() => VehicleSaver.GenerateVehicle(
+        VehicleSaver.LoadVehicle("test"),
+        FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent);
+
 }

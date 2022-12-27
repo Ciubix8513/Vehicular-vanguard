@@ -16,4 +16,14 @@ namespace CarGame.Vehicle.Saving
             Scale = t.localScale;
         }
     }
+    //An extension class and an extension function just to make my life a bit easier
+    public static class TransformDataTransformExtension
+    {
+        public static void Load(this Transform t, TransformData d)
+        {
+            t.localPosition = d.Position;
+            t.localEulerAngles = d.RotationEuler;
+            t.localScale = d.Scale;
+        }
+    }
 }
