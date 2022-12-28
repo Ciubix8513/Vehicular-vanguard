@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using Cinemachine;
 
-[System.Serializable]
+[Serializable]
 public enum Mode
 {
     editor,
     game,
     menu
 }
-[System.Serializable]
+[Serializable]
 public enum EditorMode
 {
     place,
@@ -37,8 +37,13 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private CinemachineVirtualCamera _editorCamera;
+
+    [SerializeField]
+    private CinemachineFreeLook _gameCamera;
     [SerializeField]
     private Transform _mainCamera;
+    private static InputManager s_this;
+    void Awake() => s_this = this;
     void ProcessEK()
     {
         Debug.Log("Processing Editor key");
@@ -89,5 +94,6 @@ public class InputManager : MonoBehaviour
             PartGroups.UpGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel, int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
         }
     }
+    public static void SetGameCameraTarget(Transform target) => s_this._gameCamera.Follow = s_this._gameCamera.LookAt = target;
 
 }

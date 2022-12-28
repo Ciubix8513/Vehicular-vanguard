@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 [System.Serializable]
-public struct attachments
+public struct Attachments
 {
     public bool up;
     public bool down;
@@ -16,7 +17,6 @@ public struct attachments
     {
         get
         {
-
             if (i == Vector3Int.right)
                 return right;
             else if (i == Vector3Int.left)
@@ -55,7 +55,7 @@ public class Part : MonoBehaviour
     // public int Id;
     public int health;
     public Vector3 m_size;
-    public attachments attachedParts;
+    public Attachments attachedParts;
     public Vector3Int parentFace;
     public Part parentPart;
     public bool isRoot;

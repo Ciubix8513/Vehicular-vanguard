@@ -15,13 +15,15 @@ namespace CarGame.Vehicle.Saving
                 new(root.transform),
                 root.partData.ID,
                 root.GetHashCode(),
-                new());
+                new(),
+                root.attachedParts);
             root.transform.parent.GetComponentsInChildren<Part>(true).Where(_ => !_.isRoot).ToList()
             .ForEach(c => v.Parts.Add(new(
                     c.GetHashCode(),
                     new(c.transform),
                     c.partData.ID,
-                    c.parentPart.GetHashCode()
+                    c.parentPart.GetHashCode(),
+                    c.attachedParts
                 )));
             return v;
         }
@@ -71,6 +73,11 @@ namespace CarGame.Vehicle.Saving
                 var p = lookUp[_.SaveID];
                 p.partData = PartDictionary.Parts[_.ID];
                 p.transform.Load(_.Transform);
+                p.attachedParts = _.OccupiedFaces;
+                p.parentPart = lookUp[_.AttachedPartID];
+                if(p.parentPart == null) return;
+                var f = p.gameObject.AddComponent<FixedJoint>();
+                f.connectedBody = p.parentPart.GetComponent<Rigidbody>();
             });
 
         }

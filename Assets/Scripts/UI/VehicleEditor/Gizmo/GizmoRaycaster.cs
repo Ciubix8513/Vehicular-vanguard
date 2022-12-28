@@ -11,7 +11,7 @@ public class GizmoRaycaster : MonoBehaviour
     private static int s_axis;
     private static PartProxy s_rotatingObj;
     private static Quaternion s_originalRotation;
-    private static attachments s_originalAttachments;
+    private static Attachments s_originalAttachments;
     private static int s_oldLayer;
     private void Awake()
     {
