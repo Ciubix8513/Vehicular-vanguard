@@ -90,8 +90,8 @@ public class InputManager : MonoBehaviour
             GizmoRaycaster.Rotating = false;
         if (mode == Mode.game && !Input.GetMouseButton(1))
         {
-            PartGroups.DownGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel, int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
-            PartGroups.UpGroup.Select(x => new Tuple<KeyCode, List<Tuple<Part.ActionDel, int>>>(x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
+            PartGroups.DownGroup.group.Select(x => (x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
+            PartGroups.UpGroup.group.Select(x => (x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
         }
     }
     public static void SetGameCameraTarget(Transform target) => s_this._gameCamera.Follow = s_this._gameCamera.LookAt = target;

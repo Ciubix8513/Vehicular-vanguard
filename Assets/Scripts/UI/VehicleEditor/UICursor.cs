@@ -82,15 +82,18 @@ public class UICursor : MonoBehaviour
     {
         if (!PartGO.gameObject.activeSelf)
         {
-            if (PartGO.binds.Count == 0) goto end;
-            PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
-            PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
-        end:
+            //Delete the part
+            //     if (PartGO.binds.Count == 0) goto end;
+            //     PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup.[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
+            //     PartGO.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == PartGO.GetInstanceID()));
+            // end:
+            PartGroups.DownGroup.RemoveAllByInstanceId(PartGO.GetInstanceID());
+            PartGroups.UpGroup.RemoveAllByInstanceId(PartGO.GetInstanceID());
             Destroy(PartGO.gameObject);
         }
         IsDragging = false;
         s_image.gameObject.SetActive(false);
-        s_originalLayers.ForEach(x => x.Item1.layer = x.Item2);
+        s_originalLayers.ForEach(x => { if (x.Item1 != null) x.Item1.layer = x.Item2;});
         if (SnappingObject == null)
         {
             Destroy(PartGO.GetComponent<FixedJoint>());

@@ -23,7 +23,8 @@ namespace CarGame.Vehicle.Saving
                     new(c.transform),
                     c.partData.ID,
                     c.parentPart.GetHashCode(),
-                    c.attachedParts
+                    c.attachedParts,
+                    c.binds
                 )));
             return v;
         }
@@ -69,15 +70,23 @@ namespace CarGame.Vehicle.Saving
             v.Parts.ForEach(_ => lookUp.Add(_.SaveID,
             Object.Instantiate(PartDictionary.Parts[_.ID].prefab, parent, false).
             GetComponent<Part>()));
-            v.Parts.ForEach(_ =>{
+            v.Parts.ForEach(_ =>
+            {
                 var p = lookUp[_.SaveID];
                 p.partData = PartDictionary.Parts[_.ID];
                 p.transform.Load(_.Transform);
                 p.attachedParts = _.OccupiedFaces;
                 p.parentPart = lookUp[_.AttachedPartID];
-                if(p.parentPart == null) return;
+                if (p.parentPart == null) return;
                 var f = p.gameObject.AddComponent<FixedJoint>();
                 f.connectedBody = p.parentPart.GetComponent<Rigidbody>();
+                var act = p.GetActions().ToDictionary(_ => _.Item2, _ => _.Item1);
+                _.Binds.ForEach(_ =>
+                {
+                    //0 = Down, 1 = up
+                    if (_.Item3 == 0) PartGroups.DownGroup.Add(_.Item2, (act[_.Item1], p.GetInstanceID()));
+                    else PartGroups.UpGroup.Add(_.Item2, (act[_.Item1], p.GetInstanceID()));
+                });
             });
 
         }

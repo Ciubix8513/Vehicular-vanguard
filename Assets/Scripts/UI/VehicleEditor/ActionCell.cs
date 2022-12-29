@@ -46,16 +46,12 @@ public class ActionCell : MonoBehaviour
     {
         if (_dropdown.value == _downOption)
         {
-            if (!PartGroups.DownGroup.ContainsKey(_key))
-                PartGroups.DownGroup.Add(_key, new());
-            PartGroups.DownGroup[_key].Add(new System.Tuple<Part.ActionDel, int>(del, _part.GetInstanceID()));
+            PartGroups.DownGroup.Add(_key,(del,_part.GetInstanceID()));
             if (!_part.binds.ContainsKey(Name.text))
                 _part.binds.Add(Name.text, new(_key, 0));
             return;
         }
-        if (!PartGroups.UpGroup.ContainsKey(_key))
-            PartGroups.UpGroup.Add(_key, new());
-        PartGroups.UpGroup[_key].Add(new System.Tuple<Part.ActionDel, int>(del, _part.GetInstanceID()));
+        PartGroups.UpGroup.Add(_key,(del,_part.GetInstanceID()));
         if (!_part.binds.ContainsKey(Name.text))
             _part.binds.Add(Name.text, new(_key, 1));
     }

@@ -65,6 +65,7 @@ public class Part : MonoBehaviour
     public delegate void ActionDel();
     public virtual List<Tuple<ActionDel, string, KeyCode, int>> GetActions() =>
     new() { new(Activate, "Activate", KeyCode.W, 0), new(DeActivate, "Deactivate", KeyCode.W, 1) };
+    //string = action name, KeyCode = action key, int = action type (key up/down)
     public Dictionary<string, Tuple<KeyCode, int>> binds = new();
     public virtual void Activate() => isActive = true;
     public virtual void DeActivate() => isActive = false;

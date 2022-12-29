@@ -66,8 +66,10 @@ public class InputMenu : MonoBehaviour
         _partProxy.part.GetActions().ForEach(a => Instantiate(_actionPrefab, Vector3.zero, Quaternion.identity, _actionParent.transform).GetComponent<ActionCell>().Init(a, _partProxy.part));
         if (_partProxy.part.binds.Count == 0) return;
         // PartGroups.RemoveReferences(_part.GetInstanceID());
-        _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
-        _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
+        // _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
+        // _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
+        PartGroups.DownGroup.RemoveAllByInstanceId(_partProxy.part.GetInstanceID());
+        PartGroups.UpGroup.RemoveAllByInstanceId(_partProxy.part.GetInstanceID());
         _partProxy.part.binds.Clear();
 
     }
