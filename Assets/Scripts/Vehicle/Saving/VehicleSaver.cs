@@ -57,7 +57,13 @@ namespace CarGame.Vehicle.Saving
         {
             if (v == null) return;
             //Destroy all children
-            parent.Cast<Transform>().ToList().ForEach(_ => Object.Destroy(_.gameObject));
+            parent.Cast<Transform>().ToList().ForEach(_ =>
+            {
+                //Remove the key binds
+                PartGroups.DownGroup.RemoveAllByInstanceId(_.gameObject.GetInstanceID());
+                PartGroups.UpGroup.RemoveAllByInstanceId(_.gameObject.GetInstanceID());
+                Object.Destroy(_.gameObject);
+            });
             var rootData = PartDictionary.Parts[v.RootID];
             var root = Object.Instantiate(rootData.prefab,
                                    parent,
@@ -84,8 +90,9 @@ namespace CarGame.Vehicle.Saving
                 _.Binds.ForEach(_ =>
                 {
                     //0 = Down, 1 = up
-                    if (_.Item3 == 0) PartGroups.DownGroup.Add(_.Item2, (act[_.Item1], p.GetInstanceID()));
-                    else PartGroups.UpGroup.Add(_.Item2, (act[_.Item1], p.GetInstanceID()));
+                    if (_.Item3 == 0) PartGroups.DownGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
+                    else PartGroups.UpGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
+                    p.binds.Add(_.Item1,new(_.Item2,_.Item3));
                 });
             });
 

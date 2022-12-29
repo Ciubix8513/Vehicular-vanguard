@@ -19,8 +19,12 @@ public class GroupWrapper
 
 public class PartGroups : MonoBehaviour
 {
-    // public static Dictionary<KeyCode, List<Tuple<Part.ActionDel, int>>> DownGroup = new();
-    // public static Dictionary<KeyCode, List<Tuple<Part.ActionDel, int>>> UpGroup = new();
-    public static GroupWrapper DownGroup = new();
-    public static GroupWrapper UpGroup = new();
+    public static GroupWrapper DownGroup;
+    public static GroupWrapper UpGroup;
+    void Awake()
+    {
+        Debug.Log("Called awake");
+        DownGroup = new();
+        UpGroup = new();
+    }
 }
