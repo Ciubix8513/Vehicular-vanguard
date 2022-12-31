@@ -97,6 +97,7 @@ public class UICursor : MonoBehaviour
         if (SnappingObject == null)
         {
             Destroy(PartGO.GetComponent<FixedJoint>());
+            CarGame.Vehicle.Editor.HistoryManager.ProcessChange();
             return;
         }
         PartGO.gameObject.AddComponent<FixedJoint>().connectedBody = SnappingObject.GetComponent<Rigidbody>();
@@ -106,5 +107,6 @@ public class UICursor : MonoBehaviour
         SnappingObject.attachedParts[SnappingFace] = true;
         PartGO.attachedParts[-SnappingFace] = true;
         PartGO = null;
+        CarGame.Vehicle.Editor.HistoryManager.ProcessChange();
     }
 }

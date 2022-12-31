@@ -1,4 +1,5 @@
 using System.Collections;
+using CarGame.Vehicle.Editor;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +15,8 @@ public class ActionCell : MonoBehaviour
     private Part _part;
     [SerializeField]
     int _downOption;
-    public void Init(System.Tuple<Part.ActionDel, string,KeyCode,int> tuple, Part p)
+    private InputMenu _parent;
+    public void Init(System.Tuple<Part.ActionDel, string,KeyCode,int> tuple, Part p,InputMenu par)
     {
         Name.text = tuple.Item2;
         del = tuple.Item1;
@@ -26,6 +28,7 @@ public class ActionCell : MonoBehaviour
         _key = p.binds[tuple.Item2].Item1;
         _dropdown.value = p.binds[tuple.Item2].Item2;
         _keyText.text = _key.ToString();
+        _parent = par;
     }
 
     public void GetKey() => StartCoroutine(getKey());
@@ -41,7 +44,14 @@ public class ActionCell : MonoBehaviour
             }
         end:
         _keyText.text = _key.ToString();
+        SaveAll();
     }
+    public void SaveAll()
+    {
+        _parent.SaveActions();
+        HistoryManager.ProcessChange();
+    }
+
     public void Save()
     {
         if (_dropdown.value == _downOption)

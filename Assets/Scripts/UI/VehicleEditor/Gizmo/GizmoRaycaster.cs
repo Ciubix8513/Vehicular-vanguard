@@ -81,5 +81,6 @@ public class GizmoRaycaster : MonoBehaviour
             s_rotatingObj.part.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
         else
             s_rotatingObj.part.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
+        CarGame.Vehicle.Editor.HistoryManager.ProcessChange();
     }
 }
