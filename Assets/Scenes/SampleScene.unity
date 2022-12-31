@@ -2605,7 +2605,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -4657,6 +4657,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868624739}
   m_CullTransparentMesh: 1
+--- !u!1001 &1888502865
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -67.53701
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00440681
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.99999034
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -180.505
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382296517440061925, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748107986182297713, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Particle System
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39aab8bd83a10a78fba6e4b4bbff8d6a, type: 3}
 --- !u!1 &1918279074
 GameObject:
   m_ObjectHideFlags: 3
