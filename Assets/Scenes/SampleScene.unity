@@ -1670,8 +1670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EditorKey: 98
-  Group0: 119
-  EditorUI: {fileID: 701707588}
+  _editorUI: {fileID: 701707588}
   OnEditorOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -4200,7 +4199,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777804621}
-  m_LocalRotation: {x: 0.000000002554691, y: 0.99912417, z: 0.041844726, w: -0.000000060998204}
+  m_LocalRotation: {x: 0.0000000011034917, y: 0.99912417, z: 0.041844726, w: -0.000000026348003}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

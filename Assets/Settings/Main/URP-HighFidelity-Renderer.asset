@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: RenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     passTag: RenderObjects
     Event: 1000
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: OutlineFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineResources: {fileID: 11400000, guid: 2fcccd24d2e95471ca80f30fc4f2c7be, type: 2}
   _outlineLayers: {fileID: 11400000, guid: 270b1c9b8ffcfa82585101b632b893a2, type: 2}
   _outlineSettings:
     _outlineSettings: {fileID: 11400000, guid: 726bfe95cd8f7a7e2bbbaa7e1268e93c, type: 2}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: OutlineFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineResources: {fileID: 11400000, guid: 2fcccd24d2e95471ca80f30fc4f2c7be, type: 2}
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 11400000, guid: 9665e1336bcd3f3eb8113f7a46a3fe75, type: 2}
