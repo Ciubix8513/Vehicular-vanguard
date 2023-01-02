@@ -14,6 +14,10 @@ namespace CarGame.Vehicle.Saving
             Position = t.localPosition;
             RotationEuler = t.localEulerAngles;
             Scale = t.localScale;
+            //This is such a stupid fix for a stupid problem
+            //TODO remove beyond editor demos
+            if(Mathf.Abs(t.localPosition.y) < .004f)
+            Position.y = 0;
         }
     }
     //An extension class and an extension function just to make my life a bit easier

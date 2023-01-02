@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using Cinemachine;
+using CarGame.Vehicle.Editor;
 
 [Serializable]
 public enum Mode
@@ -25,10 +26,9 @@ public class InputManager : MonoBehaviour
     public static Mode mode = Mode.game;
     public static EditorMode editorMode = EditorMode.place;
     public KeyCode EditorKey = KeyCode.B;
-    public KeyCode Group0 = KeyCode.W;
 
     [SerializeField]
-    private GameObject EditorUI;
+    private GameObject _editorUI;
 
     [SerializeField]
     private UnityEvent OnEditorOpen = new();
@@ -43,7 +43,12 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private Transform _mainCamera;
     private static InputManager s_this;
-    void Awake() => s_this = this;
+    void Awake()
+    {
+        // Time.timeScale = 0;
+        s_this = this;
+    }
+
     void ProcessEK()
     {
         Debug.Log("Processing Editor key");
@@ -52,7 +57,7 @@ public class InputManager : MonoBehaviour
         {
             GizmoRaycaster.HideGizmo();
             mode = Mode.game;
-            EditorUI.SetActive(false);
+            _editorUI.SetActive(false);
             Time.timeScale = 1;
             OnEditorClose.Invoke();
             editorMode = EditorMode.place;
@@ -64,34 +69,61 @@ public class InputManager : MonoBehaviour
         _editorCamera.transform.rotation = _mainCamera.transform.rotation;
         _editorCamera.Priority = 100;
         mode = Mode.editor;
-        EditorUI.SetActive(true);
+        _editorUI.SetActive(true);
         Time.timeScale = 0;
         OnEditorOpen.Invoke();
         Cursor.lockState = CursorLockMode.None;
     }
     void Start()
     {
-        if(mode != Mode.editor)
+        if (mode != Mode.editor)
             ProcessEK();
     }
-    void Update()
+    void ProcessEditorModeKeys()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-            ProcessEK();
         if (UICursor.IsDragging && Input.GetMouseButtonUp(0))
             UICursor.EndDragging();
-        if (!UICursor.IsDragging && Input.GetMouseButtonDown(0) && mode == Mode.editor && editorMode == EditorMode.place)
+        if (!UICursor.IsDragging && Input.GetMouseButtonDown(0) && editorMode == EditorMode.place)
             PartPlacer.DoEditorRaycast();
-        if (mode == Mode.editor && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
             GizmoRaycaster.Raycast();
-        if (mode == Mode.editor && editorMode == EditorMode.input && Input.GetMouseButtonDown(0))
+        if (editorMode == EditorMode.input && Input.GetMouseButtonDown(0))
             InputMenu.DoRaycast();
-        if (mode == Mode.editor && GizmoRaycaster.Rotating && Input.GetMouseButtonUp(0))
+        if (GizmoRaycaster.Rotating && Input.GetMouseButtonUp(0))
             GizmoRaycaster.Rotating = false;
-        if (mode == Mode.game && !Input.GetMouseButton(1))
+        if (!UICursor.IsDragging)
         {
-            PartGroups.DownGroup.group.Select(x => (x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyDown(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
-            PartGroups.UpGroup.group.Select(x => (x.Key, x.Value)).ToList().ForEach(x => { if (Input.GetKeyUp(x.Item1)) x.Item2.ForEach(y => y.Item1()); });
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            {
+                if (Input.GetKeyDown(KeyCode.Z))
+                    HistoryManager.ActionIndex--;
+                else if (Input.GetKeyDown(KeyCode.Y))
+                    HistoryManager.ActionIndex++;
+            }
+        }
+    }
+    void ProcessGameModeKeys()
+    {
+        PartGroups.DownGroup.group.Select(x => (x.Key, x.Value))
+                                  .ToList()
+                                  .ForEach(x => { if (Input.GetKeyDown(x.Key)) x.Value.ForEach(y => y.Item1()); });
+        PartGroups.UpGroup.group.Select(x => (x.Key, x.Value))
+                                .ToList()
+                                .ForEach(x => { if (Input.GetKeyUp(x.Key)) x.Value.ForEach(y => y.Item1()); });
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(EditorKey))
+            ProcessEK();
+        switch (mode)
+        {
+            case Mode.editor:
+                ProcessEditorModeKeys();
+                break;
+            case Mode.game:
+                ProcessGameModeKeys();
+                break;
         }
     }
     public static void SetGameCameraTarget(Transform target) => s_this._gameCamera.Follow = s_this._gameCamera.LookAt = target;

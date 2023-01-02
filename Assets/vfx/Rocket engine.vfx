@@ -16,10 +16,10 @@ MonoBehaviour:
   - title: Color variation
     position:
       serializedVersion: 2
-      x: -165
-      y: 535
+      x: -178
+      y: 551
       width: 1069
-      height: 424
+      height: 427
     contents:
     - model: {fileID: 8926484042661614771}
       id: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
   - title: Initial position
     position:
       serializedVersion: 2
-      x: 456
-      y: 357
+      x: 465
+      y: 377
       width: 432
       height: 162
     contents:
@@ -77,10 +77,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -165
-    y: -184
-    width: 1530
-    height: 1991
+    x: -178
+    y: -168
+    width: 1543
+    height: 1855
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: New VFX
+  m_Name: Rocket engine
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -169,7 +169,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New VFX
+  m_Name: Rocket engine
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614556}
-  m_UIPosition: {x: 941, y: -184}
+  m_UIPosition: {x: 941, y: -168}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -359,7 +359,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614754}
   - {fileID: 8926484042661614877}
   - {fileID: 8926484042661615009}
-  m_UIPosition: {x: 941, y: 748}
+  m_UIPosition: {x: 941, y: 645}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -397,7 +397,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614589}
   - {fileID: 8926484042661614591}
   - {fileID: 8926484042661614593}
-  m_UIPosition: {x: 941, y: 1228}
+  m_UIPosition: {x: 941, y: 1108}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 211, y: 677}
+  m_UIPosition: {x: 198, y: 696}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 77, y: 766}
+  m_UIPosition: {x: 64, y: 785}
   m_UICollapsed: 0
   m_UISuperCollapsed: 1
   m_InputSlots:
@@ -1742,7 +1742,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: -140, y: 736}
+  m_UIPosition: {x: -153, y: 755}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2242,7 +2242,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 563, y: 594}
+  m_UIPosition: {x: 550, y: 613}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3416,7 +3416,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 669, y: 416}
+  m_UIPosition: {x: 678, y: 436}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -4415,7 +4415,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -4441,7 +4441,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615037}
       inputSlot: {fileID: 8926484042661614983}
-    position: {x: 481, y: 443}
+    position: {x: 490, y: 463}
     expandedSlots: []
     expanded: 0
   - m_Id: 1
@@ -4665,7 +4665,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615073}
       inputSlot: {fileID: 8926484042661614813}
-    position: {x: 392, y: 594}
+    position: {x: 370, y: 610}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615073
@@ -4881,7 +4881,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615079}
       inputSlot: {fileID: 8926484042661614823}
-    position: {x: 392, y: 629}
+    position: {x: 370, y: 645}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615079

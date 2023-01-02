@@ -53,9 +53,10 @@ namespace CarGame.Vehicle.Saving
             }
             return v;
         }
-        public static void GenerateVehicle(Vehicle v, Transform parent)
+        //Generates a vehicle from serialized data, returns the Part component of the root
+        public static Part GenerateVehicle(Vehicle v, Transform parent)
         {
-            if (v == null) return;
+            if (v == null) return null;
             //Destroy all children
             parent.Cast<Transform>().ToList().ForEach(_ =>
             {
@@ -95,7 +96,7 @@ namespace CarGame.Vehicle.Saving
                     p.binds.Add(_.Item1,new(_.Item2,_.Item3));
                 });
             });
-
+            return root;
         }
     }
 }

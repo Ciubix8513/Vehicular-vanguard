@@ -18,25 +18,28 @@ namespace CarGame.Vehicle.Editor
         //Index to current action
         private static int s_action_index_private;
 
-        public static int s_action_index
+        public static int ActionIndex
         {
-            get => s_action_index_private; set
+            get => s_action_index_private; 
+            set
             {
+                if(value < 0)return;
+
                 s_needUpdate = true;
                 if (value == s_action_index_private) return;
                 //Undo
-                if (value > s_action_index)
+                if (value < ActionIndex)
                     if (value < s_history.Count - 1)
                     {
                         s_action_index_private = value;
-                        VehicleSaver.GenerateVehicle(s_history[s_action_index], s_vehicleRoot);
+                        Root = VehicleSaver.GenerateVehicle(s_history[ActionIndex], s_vehicleRoot);
                         return;
                     }
                     else return;
                 //Redo
                 if (value > s_history.Count - 1) return;
                 s_action_index_private = value;
-                VehicleSaver.GenerateVehicle(s_history[s_action_index], s_vehicleRoot);
+                Root = VehicleSaver.GenerateVehicle(s_history[ActionIndex], s_vehicleRoot);
             }
         }
 
@@ -44,7 +47,7 @@ namespace CarGame.Vehicle.Editor
         {
             s_history = new();
             history = new();
-            s_action_index = -1;
+            s_action_index_private = -1;
         }
         void Start()
         {
@@ -65,10 +68,16 @@ namespace CarGame.Vehicle.Editor
         {
             s_needUpdate = true;
             //If we're in the past clear all actions ahead
-            if (s_action_index < s_history.Count - 1)
-                s_history.RemoveRange(s_action_index + 1, s_history.Count - s_action_index + 1);
+            if (ActionIndex < s_history.Count - 1)
+                s_history.RemoveRange(ActionIndex + 1, s_history.Count - (ActionIndex + 1));
             s_history.Add(VehicleSaver.SerializeVehicle(Root));
             s_action_index_private++;
+        }
+        public static void ResetHistory()
+        {
+            s_action_index_private = -1;
+            s_history.Clear();
+            ProcessChange();
         }
     }
 }

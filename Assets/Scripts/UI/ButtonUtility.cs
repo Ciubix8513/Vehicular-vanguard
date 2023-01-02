@@ -11,9 +11,12 @@ public class ButtonUtility : MonoBehaviour
         "test");
     public void TestLoading()
     {
-        VehicleSaver.GenerateVehicle(
+        var Root = VehicleSaver.GenerateVehicle(
         VehicleSaver.LoadVehicle("test"),
         FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent);
-        InputManager.SetGameCameraTarget(FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform);
+        // InputManager.SetGameCameraTarget(FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform);
+        InputManager.SetGameCameraTarget(Root.transform);
+        CarGame.Vehicle.Editor.HistoryManager.Root = Root;
+        CarGame.Vehicle.Editor.HistoryManager.ResetHistory();
     }
 }
