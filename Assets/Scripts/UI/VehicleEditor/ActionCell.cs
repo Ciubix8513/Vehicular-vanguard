@@ -18,17 +18,17 @@ public class ActionCell : MonoBehaviour
     private InputMenu _parent;
     public void Init(System.Tuple<Part.ActionDel, string,KeyCode,int> tuple, Part p,InputMenu par)
     {
+        _parent = par;
         Name.text = tuple.Item2;
         del = tuple.Item1;
         _key = tuple.Item3;
-        _dropdown.value = tuple.Item4;
+        _dropdown.SetValueWithoutNotify(tuple.Item4);
         _part = p;
         _keyText.text = _key.ToString();
         if (p.binds.Count == 0) return;
         _key = p.binds[tuple.Item2].Item1;
         _dropdown.value = p.binds[tuple.Item2].Item2;
         _keyText.text = _key.ToString();
-        _parent = par;
     }
 
     public void GetKey() => StartCoroutine(getKey());
@@ -48,6 +48,11 @@ public class ActionCell : MonoBehaviour
     }
     public void SaveAll()
     {
+        if(_parent == null) {
+            print("Parent was null");
+            return;
+        }
+        print("Saving after controls changes");
         _parent.SaveActions();
         HistoryManager.ProcessChange();
     }

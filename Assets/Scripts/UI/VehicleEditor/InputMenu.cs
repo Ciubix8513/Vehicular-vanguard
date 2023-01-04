@@ -22,7 +22,7 @@ public class InputMenu : MonoBehaviour
     private PartProxy _partProxy = null;
     private bool _selected;
     private Dictionary<int, int> _originalLayers;
-    void Awake()
+    void Start()
     {
         s_camera = Camera.main;
         s_this = this;
