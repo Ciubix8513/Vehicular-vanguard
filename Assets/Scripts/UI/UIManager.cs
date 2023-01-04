@@ -25,9 +25,9 @@ public class UIManager : MonoBehaviour
             Debug.LogException(new System.IndexOutOfRangeException());
             return;
         }
-        EditorButtons.ForEach(_ => _.intractable = false);
+        EditorButtons.ForEach(_ => _.interactable = true);
         EditorTabs.ForEach(_ => _.SetActive(false));
         EditorTabs[(int)tab].SetActive(true);
-        EditorButtons[(int)tab].intractable = true;
+        EditorButtons[(int)tab].interactable = false;
     }
 }

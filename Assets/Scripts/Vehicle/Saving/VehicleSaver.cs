@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CarGame.Vehicle.Saving
 {
-    #nullable enable
+#nullable enable
     public class VehicleSaver
     {
         //Save a vehicle based on the root
@@ -58,14 +58,16 @@ namespace CarGame.Vehicle.Saving
             }
             return v;
         }
-        public static (Part?,Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>
-            (GenerateVehicle(v.Vehicle,parent,new List<int>(){v.SelectedPartId},out var o),o?[0]);
+        public static (Part?, Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>
+            (GenerateVehicle(v.Vehicle, parent, new List<int>() { v.SelectedPartId }, out List<Part> o), o.Count() == 0 ? null : o[0]);
 
         //Generates a vehicle from serialized data, returns the Part component of the root
-        public static Part? GenerateVehicle(Vehicle v, Transform parent,List<int>? requestedIndices,out List<Part>? requestedParts)
+        public static Part? GenerateVehicle(Vehicle v, Transform parent,
+        List<int>? requestedIndices,
+        out List<Part>? requestedParts)
         {
             requestedParts = null;
-            if (v == null)return null;
+            if (v == null) return null;
             //Destroy all children
             parent.Cast<Transform>().ToList().ForEach(_ =>
             {
@@ -87,7 +89,7 @@ namespace CarGame.Vehicle.Saving
                 PartDictionary.Parts[_.ID].prefab,
                 parent,
                 false).GetComponent<Part>());
-            lookUp.Add(v.RootSaveID,root);
+            lookUp.Add(v.RootSaveID, root);
             requestedParts = requestedIndices?.Where(
                 _ => lookUp.ContainsKey(_)).Select(_ => lookUp[_]).ToList();
             //Assign the part data

@@ -39,6 +39,7 @@ namespace CarGame.Vehicle.Editor
         }
         static void Generate(int index)
         {
+            print("Trying to generate for " + index + " length = " + s_history.Count);
             var res = VehicleSaver.GenerateHistoryVehicle(s_history[index], s_vehicleRoot);
             Root = res.Item1;
             if(s_history[index].EditorMode != EditorMode.input)return;

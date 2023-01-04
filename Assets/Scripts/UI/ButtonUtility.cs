@@ -13,7 +13,9 @@ public class ButtonUtility : MonoBehaviour
     {
         var Root = VehicleSaver.GenerateVehicle(
         VehicleSaver.LoadVehicle("test"),
-        FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent);
+        FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent,
+        null,
+        out var n);
         // InputManager.SetGameCameraTarget(FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform);
         InputManager.SetGameCameraTarget(Root.transform);
         CarGame.Vehicle.Editor.HistoryManager.Root = Root;

@@ -64,7 +64,7 @@ public class InputMenu : MonoBehaviour
         if (_part!= null)
             _part.SetProxiesLayer(6);
         _part = part;
-        part.gameObject.layer = 9;
+        part.SetProxiesLayer(9);
         _nameText.text = _part.partData.name;
         _descText.text = _part.partData.description;
 
