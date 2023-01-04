@@ -14,13 +14,14 @@ public class InputMenu : MonoBehaviour
     TextMeshProUGUI _nameText;
     [SerializeField]
     TextMeshProUGUI _descText;
-
-    //----UI fields----
+    //----Data----
     private List<GameObject> _parts = new();
     private static Camera s_camera;
-    private static InputMenu s_this;
-    private PartProxy _partProxy = null;
+    public static InputMenu s_this;
+    private Part _part = null;
     private bool _selected;
+    private static int s_selectedId;
+    public static int SelectedId { get => s_selectedId;}
     private Dictionary<int, int> _originalLayers;
     void Start()
     {
@@ -36,44 +37,47 @@ public class InputMenu : MonoBehaviour
             Destroy(c.gameObject);
         _nameText.text = _descText.text = "";
         _selected = false;
+        s_selectedId = 0;
     }
     public void OnMenuClose()
     {
         _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
         _selected = false;
+        s_selectedId = 0;
     }
     public static void DoRaycast()
     {
-        if (!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition), out var hit, 100.0f, 1 << 6)) return;
+        if (!Physics.Raycast(s_camera.ScreenPointToRay(Input.mousePosition),
+                             out var hit,
+                             100.0f,
+                             1 << 6)) return;
         if (!hit.collider.CompareTag("Part")) return;
-        s_this.LoadData(hit.collider.GetComponent<PartProxy>());
+        s_this.LoadData(hit.collider.GetComponent<PartProxy>().part);
     }
-    private void LoadData(PartProxy part)
+    public void LoadData(Part part)
     {
         if (_selected)
             SaveActions();
         _selected = true;
-        Debug.Log($"Loading data for part {part.part.partData.name}");
-        if (_partProxy != null)
-            _partProxy.gameObject.layer = 6;
-        _partProxy = part;
+        s_selectedId = part.GetHashCode();
+        Debug.Log($"Loading data for part {part.partData.name}");
+        if (_part!= null)
+            _part.SetProxiesLayer(6);
+        _part = part;
         part.gameObject.layer = 9;
-        _nameText.text = _partProxy.part.partData.name;
-        _descText.text = _partProxy.part.partData.description;
+        _nameText.text = _part.partData.name;
+        _descText.text = _part.partData.description;
 
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
-        _partProxy.part.GetActions().ForEach(a => Instantiate(_actionPrefab,
+        _part.GetActions().ForEach(a => Instantiate(_actionPrefab,
             Vector3.zero,
             Quaternion.identity,
-            _actionParent.transform).GetComponent<ActionCell>().Init(a, _partProxy.part,this));
-        if (_partProxy.part.binds.Count == 0) return;
-        // PartGroups.RemoveReferences(_part.GetInstanceID());
-        // _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 0).ToList().ForEach(x => PartGroups.DownGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
-        // _partProxy.part.binds.Select(x => x.Value).Where(x => x.Item2 == 1).ToList().ForEach(x => PartGroups.UpGroup[x.Item1].RemoveAll(s => s.Item2 == _partProxy.part.GetInstanceID()));
-        PartGroups.DownGroup.RemoveAllByInstanceId(_partProxy.part.GetInstanceID());
-        PartGroups.UpGroup.RemoveAllByInstanceId(_partProxy.part.GetInstanceID());
-        _partProxy.part.binds.Clear();
+            _actionParent.transform).GetComponent<ActionCell>().Init(a, _part,this));
+        if (_part.binds.Count == 0) return;
+        PartGroups.DownGroup.RemoveAllByInstanceId(_part.GetInstanceID());
+        PartGroups.UpGroup.RemoveAllByInstanceId(_part.GetInstanceID());
+        _part.binds.Clear();
 
     }
     public void SaveActions()

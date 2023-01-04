@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -61,14 +62,20 @@ public class Part : MonoBehaviour
     public bool isRoot;
     public bool Activatable;
     public bool isActive;
+    public Dictionary<string, Tuple<KeyCode, int>> binds = new();
+    public List<PartProxy> Proxies;
     public void TakeDamage(int dmg) => health -= dmg;
     public delegate void ActionDel();
     public virtual List<Tuple<ActionDel, string, KeyCode, int>> GetActions() =>
     new() { new(Activate, "Activate", KeyCode.W, 0), new(DeActivate, "Deactivate", KeyCode.W, 1) };
     //string = action name, KeyCode = action key, int = action type (key up/down)
-    public Dictionary<string, Tuple<KeyCode, int>> binds = new();
     public virtual void Activate() => isActive = true;
     public virtual void DeActivate() => isActive = false;
 
-    void Awake() => partData = partScriptable?.data;
+    void Awake()
+    {
+        partData = partScriptable?.data;
+        Proxies = GetComponentsInChildren<PartProxy>().ToList();
+    }
+    public void SetProxiesLayer(int layer) => Proxies.ForEach(_ => _.gameObject.layer = layer); 
 }

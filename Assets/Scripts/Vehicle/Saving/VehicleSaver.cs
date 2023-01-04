@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace CarGame.Vehicle.Saving
 {
+    #nullable enable
     public class VehicleSaver
     {
         //Save a vehicle based on the root
@@ -18,16 +19,20 @@ namespace CarGame.Vehicle.Saving
                 new(),
                 root.attachedParts);
             root.transform.parent.GetComponentsInChildren<Part>(true).Where(_ => !_.isRoot).ToList()
-            .ForEach(c => v.Parts.Add(new(
-                    c.GetHashCode(),
-                    new(c.transform),
-                    c.partData.ID,
-                    c.parentPart.GetHashCode(),
-                    c.attachedParts,
-                    c.binds
-                )));
+            .ForEach(
+                c => v.Parts.Add(new(
+                c.GetHashCode(),
+                new(c.transform),
+                c.partData.ID,
+                c.parentPart.GetHashCode(),
+                c.attachedParts,
+                c.binds)));
             return v;
         }
+        public static HistoryVehicle SerializeHistoryVehicle(Part root) => new(
+                SerializeVehicle(root),
+                InputManager.editorMode,
+                InputMenu.SelectedId);
         public static void SaveVehicle(Vehicle v, string name)
         {
             var json = JsonUtility.ToJson(v, true);
@@ -53,10 +58,14 @@ namespace CarGame.Vehicle.Saving
             }
             return v;
         }
+        public static (Part?,Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>
+            (GenerateVehicle(v.Vehicle,parent,new List<int>(){v.SelectedPartId},out var o),o?[0]);
+
         //Generates a vehicle from serialized data, returns the Part component of the root
-        public static Part GenerateVehicle(Vehicle v, Transform parent)
+        public static Part? GenerateVehicle(Vehicle v, Transform parent,List<int>? requestedIndices,out List<Part>? requestedParts)
         {
-            if (v == null) return null;
+            requestedParts = null;
+            if (v == null)return null;
             //Destroy all children
             parent.Cast<Transform>().ToList().ForEach(_ =>
             {
@@ -66,17 +75,22 @@ namespace CarGame.Vehicle.Saving
                 Object.Destroy(_.gameObject);
             });
             var rootData = PartDictionary.Parts[v.RootID];
-            var root = Object.Instantiate(rootData.prefab,
-                                   parent,
-                                   false).GetComponent<Part>();
+            var root = Object.Instantiate(
+                rootData.prefab,
+                parent,
+                false).GetComponent<Part>();
             root.partData = rootData;
             root.transform.Load(v.RootTransform);
             //A dictionary for faster loading
-            var lookUp = new Dictionary<int, Part> { { v.RootSaveID, root } };
-            //Populate the look up
-            v.Parts.ForEach(_ => lookUp.Add(_.SaveID,
-            Object.Instantiate(PartDictionary.Parts[_.ID].prefab, parent, false).
-            GetComponent<Part>()));
+            var lookUp = v.Parts.ToDictionary(_ => _.SaveID,
+            _ => Object.Instantiate(
+                PartDictionary.Parts[_.ID].prefab,
+                parent,
+                false).GetComponent<Part>());
+            lookUp.Add(v.RootSaveID,root);
+            requestedParts = requestedIndices?.Where(
+                _ => lookUp.ContainsKey(_)).Select(_ => lookUp[_]).ToList();
+            //Assign the part data
             v.Parts.ForEach(_ =>
             {
                 var p = lookUp[_.SaveID];
@@ -93,7 +107,7 @@ namespace CarGame.Vehicle.Saving
                     //0 = Down, 1 = up
                     if (_.Item3 == 0) PartGroups.DownGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
                     else PartGroups.UpGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
-                    p.binds.Add(_.Item1,new(_.Item2,_.Item3));
+                    p.binds.Add(_.Item1, new(_.Item2, _.Item3));
                 });
             });
             return root;
