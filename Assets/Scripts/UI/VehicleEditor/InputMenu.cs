@@ -88,7 +88,8 @@ public class InputMenu : MonoBehaviour
     }
     public void SaveActions()
     {
-        if (InputManager.editorMode != EditorMode.input) return;
+        if (InputManager.editorMode != EditorMode.input || _part == null) return;
+        _part.binds.Clear();
         foreach (Transform c in _actionParent.transform)
             c.GetComponent<ActionCell>().Save();
 
