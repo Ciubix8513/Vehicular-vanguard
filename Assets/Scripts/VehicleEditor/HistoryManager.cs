@@ -7,6 +7,8 @@ namespace CarGame.Vehicle.Editor
 {
     public class HistoryManager : MonoBehaviour
     {
+        public delegate void HistoryHandler();
+        public static event HistoryHandler HistoryChangedEvent;
         private static List<HistoryVehicle> s_history;
         //Just for debugging
         [SerializeField]
@@ -14,13 +16,22 @@ namespace CarGame.Vehicle.Editor
         public static Part Root;
         //Index to current action
         private static int s_action_index_private;
+        public static int HistoryLength
+        {
+            get
+            {
+                if (s_history != null)
+                    return s_history.Count;
+                return 0;
+            }
+        }
 
         public static int ActionIndex
         {
-            get => s_action_index_private; 
+            get => s_action_index_private;
             set
             {
-                if(value < 0)return;
+                if (value < 0) return;
                 if (value == s_action_index_private) return;
                 //Undo
                 if (value < ActionIndex)
@@ -42,11 +53,13 @@ namespace CarGame.Vehicle.Editor
             print("Trying to generate for " + index + " length = " + s_history.Count);
             var res = VehicleSaver.GenerateHistoryVehicle(s_history[index], s_vehicleRoot);
             Root = res.Item1;
-            if(s_history[index].EditorMode != EditorMode.input)return;
+            InputManager.SetGameCameraTarget(Root.transform.parent);
+            HistoryChangedEvent();
+            if (s_history[index].EditorMode != EditorMode.input) return;
             print("Loading history vehicle in input mode");
             UIManager.ActivateTab(1);
             InputMenu.s_this.OnMenuOpen();
-            InputMenu.s_this.LoadData(res.Item2,true);
+            InputMenu.s_this.LoadData(res.Item2, true);
         }
 
         void Awake()
@@ -70,6 +83,7 @@ namespace CarGame.Vehicle.Editor
                 s_history.RemoveRange(ActionIndex + 1, s_history.Count - (ActionIndex + 1));
             s_history.Add(VehicleSaver.SerializeHistoryVehicle(Root));
             s_action_index_private++;
+            HistoryChangedEvent();
         }
         public static void ResetHistory()
         {
