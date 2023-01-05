@@ -170,6 +170,7 @@ MonoBehaviour:
   isRoot: 0
   Activatable: 1
   isActive: 0
+  Proxies: []
   force: 5000
   exhaustDir: {x: 0, y: 0, z: -1}
   _exhaust: {fileID: 0}

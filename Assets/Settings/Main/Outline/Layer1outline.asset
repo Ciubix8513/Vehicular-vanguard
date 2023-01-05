@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Layer1outline
   m_EditorClassIdentifier: 
   _outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  _outlineWidth: 4
-  _outlineIntensity: 1
+  _outlineWidth: 10
+  _outlineIntensity: 64
   _outlineAlphaCutoff: 0.9
   _outlineMode: 0

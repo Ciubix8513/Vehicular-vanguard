@@ -43,9 +43,10 @@ namespace CarGame.Vehicle.Editor
             var res = VehicleSaver.GenerateHistoryVehicle(s_history[index], s_vehicleRoot);
             Root = res.Item1;
             if(s_history[index].EditorMode != EditorMode.input)return;
+            print("Loading history vehicle in input mode");
             UIManager.ActivateTab(1);
             InputMenu.s_this.OnMenuOpen();
-            InputMenu.s_this.LoadData(res.Item2);
+            InputMenu.s_this.LoadData(res.Item2,true);
         }
 
         void Awake()
@@ -58,11 +59,12 @@ namespace CarGame.Vehicle.Editor
             Root = FindObjectsOfType<Part>().Where(_ => _.isRoot).FirstOrDefault();
             s_vehicleRoot = Root.transform.parent;
             //Save the initial state 
-            ProcessChange();
+            ProcessChange("Initial save");
         }
         //A function that saves the state of a vehicle
-        public static void ProcessChange()
+        public static void ProcessChange(string e)
         {
+            print("Processing history changed caused by " + e);
             //If we're in the past clear all actions ahead
             if (ActionIndex < s_history.Count - 1)
                 s_history.RemoveRange(ActionIndex + 1, s_history.Count - (ActionIndex + 1));
@@ -73,7 +75,7 @@ namespace CarGame.Vehicle.Editor
         {
             s_action_index_private = -1;
             s_history.Clear();
-            ProcessChange();
+            ProcessChange("History reset");
         }
     }
 }

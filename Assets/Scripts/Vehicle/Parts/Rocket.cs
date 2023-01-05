@@ -8,7 +8,11 @@ public class Rocket : Part
     public Vector3Int exhaustDir;
     [SerializeField]
     private GameObject _exhaust;
-    private void Awake()=>_rb = GetComponent<Rigidbody>();
+    protected override void Awake()
+    {
+        base.Awake();
+        _rb = GetComponent<Rigidbody>();
+    }
     public override void Activate()
     {
         base.Activate();
@@ -22,6 +26,6 @@ public class Rocket : Part
     private void FixedUpdate()
     {
         if (isActive)
-            _rb.AddForceAtPosition(transform.rotation * (Vector3)exhaustDir  * force,transform.position,ForceMode.Force);
+            _rb.AddForceAtPosition(transform.rotation * (Vector3)exhaustDir * force, transform.position, ForceMode.Force);
     }
 }

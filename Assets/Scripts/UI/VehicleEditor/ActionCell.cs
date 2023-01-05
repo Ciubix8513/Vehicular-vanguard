@@ -54,7 +54,7 @@ public class ActionCell : MonoBehaviour
         }
         print("Saving after controls changes");
         _parent.SaveActions();
-        HistoryManager.ProcessChange();
+        HistoryManager.ProcessChange("Action cell change");
     }
 
     public void Save()

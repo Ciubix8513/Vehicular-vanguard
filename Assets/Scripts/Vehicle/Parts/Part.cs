@@ -72,7 +72,7 @@ public class Part : MonoBehaviour
     public virtual void Activate() => isActive = true;
     public virtual void DeActivate() => isActive = false;
 
-    void Awake()
+    protected virtual void Awake()
     {
         partData = partScriptable?.data;
         Proxies = GetComponentsInChildren<PartProxy>().ToList();

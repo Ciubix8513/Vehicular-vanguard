@@ -29,10 +29,15 @@ namespace CarGame.Vehicle.Saving
                 c.binds)));
             return v;
         }
-        public static HistoryVehicle SerializeHistoryVehicle(Part root) => new(
+        public static HistoryVehicle SerializeHistoryVehicle(Part root)
+        {
+            Debug.Log("Serialized history vehicle in " + InputManager.editorMode + " mode");
+            return new(
                 SerializeVehicle(root),
                 InputManager.editorMode,
                 InputMenu.SelectedId);
+        }
+
         public static void SaveVehicle(Vehicle v, string name)
         {
             var json = JsonUtility.ToJson(v, true);

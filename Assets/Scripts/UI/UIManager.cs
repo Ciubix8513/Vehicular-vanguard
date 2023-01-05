@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     {
         EditorTabs = _editorTabs;
         EditorUI = _editorUI;
+        EditorButtons = _editorButtons;
     }
     public static void ActivateTab(uint tab)
     {
