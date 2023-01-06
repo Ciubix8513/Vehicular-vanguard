@@ -5,7 +5,7 @@ public class Root : Part
     void Start()
     {   
         var parRB = transform.parent.GetComponent<Rigidbody>();
-        var joint = gameObject.AddComponent<FixedJoint>();
-        joint.connectedBody = parRB;
+        Joint = gameObject.AddComponent<FixedJoint>();
+        Joint.connectedBody = parRB;
     }
 }

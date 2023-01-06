@@ -106,8 +106,7 @@ namespace CarGame.Vehicle.Saving
                 p.attachedParts = _.OccupiedFaces;
                 p.parentPart = lookUp[_.AttachedPartID];
                 if (p.parentPart == null) return;
-                var f = p.gameObject.AddComponent<FixedJoint>();
-                f.connectedBody = p.parentPart.GetComponent<Rigidbody>();
+                (p.Joint = p.gameObject.AddComponent<FixedJoint>()).connectedBody = p.parentPart.GetComponent<Rigidbody>();
                 var act = p.GetActions().ToDictionary(_ => _.Item2, _ => _.Item1);
                 _.Binds.ForEach(_ =>
                 {

@@ -64,6 +64,9 @@ public class Part : MonoBehaviour
     public bool isActive;
     public Dictionary<string, Tuple<KeyCode, int>> binds = new();
     public List<PartProxy> Proxies;
+    public FixedJoint Joint;
+
+
     public void TakeDamage(int dmg) => health -= dmg;
     public delegate void ActionDel();
     public virtual List<Tuple<ActionDel, string, KeyCode, int>> GetActions() =>

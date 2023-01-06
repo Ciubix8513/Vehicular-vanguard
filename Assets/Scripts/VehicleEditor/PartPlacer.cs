@@ -23,7 +23,7 @@ public class PartPlacer : MonoBehaviour
         {
             UICursor.PartGO.parentPart.attachedParts[-UICursor.PartGO.parentFace] = false;
             UICursor.PartGO.attachedParts[UICursor.PartGO.parentFace] = false;
-            UICursor.PartGO.GetComponent<FixedJoint>().connectedBody = null;
+            UICursor.PartGO.Joint.connectedBody = null;
         }
         UICursor.PartGO.transform.parent = null;
         UICursor.SetLayer(UICursor.PartGO.transform, 2);

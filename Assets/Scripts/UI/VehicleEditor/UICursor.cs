@@ -96,11 +96,11 @@ public class UICursor : MonoBehaviour
         s_originalLayers.ForEach(x => { if (x.Item1 != null) x.Item1.layer = x.Item2;});
         if (SnappingObject == null)
         {
-            Destroy(PartGO.GetComponent<FixedJoint>());
+            Destroy(PartGO.Joint);
             CarGame.Vehicle.Editor.HistoryManager.ProcessChange("Destroying a part");
             return;
         }
-        PartGO.gameObject.AddComponent<FixedJoint>().connectedBody = SnappingObject.GetComponent<Rigidbody>();
+        (PartGO.Joint = PartGO.gameObject.AddComponent<FixedJoint>()).connectedBody = SnappingObject.GetComponent<Rigidbody>();
         PartGO.transform.parent = SnappingObject.transform.parent;
         PartGO.parentFace = SnappingFace * -1;
         PartGO.parentPart = SnappingObject;

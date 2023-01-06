@@ -81,6 +81,10 @@ public class GizmoRaycaster : MonoBehaviour
             s_rotatingObj.part.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
         else
             s_rotatingObj.part.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
+        //This is a pretty dumb fix but it should work
+        var body = s_rotatingObj.part.Joint.connectedBody;
+        Destroy(s_rotatingObj.part.Joint);
+        (s_rotatingObj.part.Joint = s_rotatingObj.gameObject.AddComponent<FixedJoint>()).connectedBody = body;
         CarGame.Vehicle.Editor.HistoryManager.ProcessChange("Rotating a part");
     }
 }
