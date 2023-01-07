@@ -16,6 +16,7 @@ public class HistoryButtonInteractor : MonoBehaviour
     //Disable buttons if history is unavailable
     private void ButtonUpdate()
     {
+        if(_undoButton == null || _redoButton == null)return;
         _undoButton.interactable = _redoButton.interactable = true;
         if( Mathf.Abs(HistoryManager.HistoryLength) == 1)
             _undoButton.interactable = _redoButton.interactable = false;

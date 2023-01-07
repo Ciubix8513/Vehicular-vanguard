@@ -31,8 +31,14 @@ public class InputMenu : MonoBehaviour
     public void OnMenuOpen()
     {
         _originalLayers = new();
-        _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { _originalLayers.Add(part.GetInstanceID(), part.layer); part.layer = 6; return part; });
-
+        // _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { _originalLayers.Add(part.GetInstanceID(), part.layer); part.layer = 6; return part; });
+        _parts = FindObjectsOfType<PartProxy>().Where(_ => _.Activatable)
+            .Select(_ => 
+            {
+                 _originalLayers.Add(_.GetInstanceID(), _.gameObject.layer); 
+                 _.gameObject.layer = 6;
+                  return _.gameObject; 
+            }).ToList();
         foreach (Transform c in _actionParent.transform)
             Destroy(c.gameObject);
         _nameText.text = _descText.text = "";

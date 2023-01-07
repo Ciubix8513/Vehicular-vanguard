@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
             _editorUI.SetActive(false);
             Time.timeScale = 1;
             OnEditorClose.Invoke();
-            editorMode = EditorMode.place;
+            // editorMode = EditorMode.place;
             _editorCamera.Priority = 0;
             Cursor.lockState = CursorLockMode.Locked;
             return;
@@ -111,9 +111,12 @@ public class InputManager : MonoBehaviour
                                 .ToList()
                                 .ForEach(x => { if (Input.GetKeyUp(x.Key)) x.Value.ForEach(y => y.Item1()); });
     }
-
+    [SerializeField]
+    private EditorMode _mode;
     void Update()
     {
+        _mode = editorMode;
+
         if (Input.GetKeyDown(EditorKey))
             ProcessEK();
         switch (mode)
