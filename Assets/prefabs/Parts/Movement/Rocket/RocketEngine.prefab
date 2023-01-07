@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55068261c0171aeb9bdf56a12437acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partScriptable: {fileID: 0}
+  _partScriptable: {fileID: 11400000, guid: 0f054d972bdac17d8bb5506580316696, type: 2}
   partData:
     name: 
     description: 
@@ -171,9 +171,10 @@ MonoBehaviour:
   Activatable: 1
   isActive: 0
   Proxies: []
+  Joint: {fileID: 0}
   force: 5000
   exhaustDir: {x: 0, y: 0, z: -1}
-  _exhaust: {fileID: 0}
+  _exhaust: {fileID: 7097586399381669079}
 --- !u!114 &7356512945906941408
 MonoBehaviour:
   m_ObjectHideFlags: 0

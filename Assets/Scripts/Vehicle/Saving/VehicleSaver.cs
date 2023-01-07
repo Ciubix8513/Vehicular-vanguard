@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CarGame.Player;
+using CarGame.Vehicle.Editor;
+using CarGame.Vehicle.Editor.UI;
 using UnityEngine;
 
 namespace CarGame.Vehicle.Saving

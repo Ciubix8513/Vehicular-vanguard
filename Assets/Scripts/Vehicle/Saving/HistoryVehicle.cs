@@ -1,3 +1,5 @@
+using CarGame.Player;
+
 namespace CarGame.Vehicle.Saving
 {
     [System.Serializable]

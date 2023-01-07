@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42acd00195f5daa31ac184a7728e6a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partScriptable: {fileID: 11400000, guid: 1c36cfcc4bda88daeaa401744088f100, type: 2}
+  _partScriptable: {fileID: 11400000, guid: 1c36cfcc4bda88daeaa401744088f100, type: 2}
   partData:
     name: 
     description: 
@@ -182,3 +182,5 @@ MonoBehaviour:
   isRoot: 1
   Activatable: 0
   isActive: 0
+  Proxies: []
+  Joint: {fileID: 0}

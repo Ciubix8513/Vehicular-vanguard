@@ -93,9 +93,17 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015615673158903313}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8691780276856062721, guid: 85b194f20ea0b5bdb96a2bf5d82a6828, type: 3}
@@ -151,6 +159,7 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3271343275684881877}
+  serializedVersion: 2
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 1
   m_SuspensionSpring:
@@ -173,7 +182,15 @@ WheelCollider:
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 7.5
     m_Stiffness: 1
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_Enabled: 1
+  m_ProvidesContacts: 0
 --- !u!1 &3870699613029858390
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,10 +233,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3870699613029858390}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -237,11 +265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e25f7469cb691a879e3f92ed86a60de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _partScriptable: {fileID: 11400000, guid: cf7d4deda4ec779808ec5acf6602f69d, type: 2}
   partData:
     name: 
     description: 
     prefab: {fileID: 0}
     sprite: {fileID: 0}
+    ID: 
+    ExcludeFromBuildMenu: 0
   health: 10
   m_size: {x: 0.5, y: 2, z: 2}
   attachedParts:
@@ -256,6 +287,8 @@ MonoBehaviour:
   isRoot: 0
   Activatable: 1
   isActive: 0
+  Proxies: []
+  Joint: {fileID: 0}
   _wheelMesh: {fileID: 1692867630582437547}
   WheelCollider: {fileID: 2346294661115076249}
   HasMotor: 1

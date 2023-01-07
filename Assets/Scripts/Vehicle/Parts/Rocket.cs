@@ -1,31 +1,34 @@
 using UnityEngine;
 
-public class Rocket : Part
+namespace CarGame.Vehicle.Parts
 {
-    private ParticleSystem _particles;
-    private Rigidbody _rb;
-    public float force = 10.0f;
-    public Vector3Int exhaustDir;
-    [SerializeField]
-    private GameObject _exhaust;
-    protected override void Awake()
+    public class Rocket : Part
     {
-        base.Awake();
-        _rb = GetComponent<Rigidbody>();
-    }
-    public override void Activate()
-    {
-        base.Activate();
-        _exhaust.SetActive(true);
-    }
-    public override void DeActivate()
-    {
-        base.DeActivate();
-        _exhaust.SetActive(false);
-    }
-    private void FixedUpdate()
-    {
-        if (isActive)
-            _rb.AddForceAtPosition(transform.rotation * (Vector3)exhaustDir * force, transform.position, ForceMode.Force);
+        private ParticleSystem _particles;
+        private Rigidbody _rb;
+        public float force = 10.0f;
+        public Vector3Int exhaustDir;
+        [SerializeField]
+        private GameObject _exhaust;
+        protected override void Awake()
+        {
+            base.Awake();
+            _rb = GetComponent<Rigidbody>();
+        }
+        public override void Activate()
+        {
+            base.Activate();
+            _exhaust.SetActive(true);
+        }
+        public override void DeActivate()
+        {
+            base.DeActivate();
+            _exhaust.SetActive(false);
+        }
+        private void FixedUpdate()
+        {
+            if (isActive)
+                _rb.AddForceAtPosition(transform.rotation * (Vector3)exhaustDir * force, transform.position, ForceMode.Force);
+        }
     }
 }

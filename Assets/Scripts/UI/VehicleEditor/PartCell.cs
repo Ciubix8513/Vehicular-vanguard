@@ -1,15 +1,20 @@
+using CarGame.Player;
 using UnityEngine;
 using UnityEngine.UI;
-public class PartCell : MonoBehaviour
+
+namespace CarGame.Vehicle.Editor.UI
 {
-    private PartData _partData;
-    public PartData partData { get => _partData; set { _partData = value; GetComponent<Image>().sprite = _partData.sprite; } }
-    public void MouseEnter()=>UICursor.EnableNameCursor(partData.name);
-    public void MouesLeave()
+    public class PartCell : MonoBehaviour
     {
-        UICursor.DisableNameCursor();
-        //Assume dragging
-        if (Input.GetMouseButton(0)&&!UICursor.IsDragging&&InputManager.editorMode == EditorMode.place)
-            UICursor.StartDragging(_partData);
+        private PartData _partData;
+        public PartData PartData { get => _partData; set { _partData = value; GetComponent<Image>().sprite = _partData.sprite; } }
+        public void MouseEnter() => UICursor.EnableNameCursor(PartData.name);
+        public void MouesLeave()
+        {
+            UICursor.DisableNameCursor();
+            //Assume dragging
+            if (Input.GetMouseButton(0) && !UICursor.IsDragging && InputManager.editorMode == EditorMode.place)
+                UICursor.StartDragging(_partData);
+        }
     }
 }

@@ -1,17 +1,15 @@
 using UnityEngine;
-
-// [ExecuteInEditMode]
-public class Resizer : MonoBehaviour
+namespace CarGame.Vehicle.Editor.Utils
 {
-    Camera _camera;
-    public float ConstSize = .2f;
-    void Awake()
+    public class Resizer : MonoBehaviour
     {
-        _camera = Camera.main;
-    }
-    void Update()
-    {
-        float mult = (transform.position - _camera.transform.position).magnitude;
-        transform.localScale = new Vector3(ConstSize,ConstSize,ConstSize ) * mult;
+        Camera _camera;
+        public float ConstSize = .2f;
+        void Awake() => _camera = Camera.main;
+        void Update()
+        {
+            float mult = (transform.position - _camera.transform.position).magnitude;
+            transform.localScale = new Vector3(ConstSize, ConstSize, ConstSize) * mult;
+        }
     }
 }

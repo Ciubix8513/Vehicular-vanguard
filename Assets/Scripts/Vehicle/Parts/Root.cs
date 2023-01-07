@@ -1,11 +1,15 @@
 using UnityEngine;
-public class Root : Part
+
+namespace CarGame.Vehicle.Parts
 {
-    //Attach the root to the parent empty on start
-    void Start()
-    {   
-        var parRB = transform.parent.GetComponent<Rigidbody>();
-        Joint = gameObject.AddComponent<FixedJoint>();
-        Joint.connectedBody = parRB;
+    public class Root : Part
+    {
+        //Attach the root to the parent empty on start
+        void Start()
+        {
+            var parRB = transform.parent.GetComponent<Rigidbody>();
+            Joint = gameObject.AddComponent<FixedJoint>();
+            Joint.connectedBody = parRB;
+        }
     }
 }
