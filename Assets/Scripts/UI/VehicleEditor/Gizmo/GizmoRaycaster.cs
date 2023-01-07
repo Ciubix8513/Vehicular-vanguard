@@ -9,7 +9,17 @@ public class GizmoRaycaster : MonoBehaviour
     [SerializeField]
     private GameObject _rotationPrefab;
     private static int s_axis;
-    private static PartProxy s_rotatingObj;
+    private static Part s_rotatingObj;
+    public static int RotatingObjectId
+    {
+        get
+        {
+            if (s_rotatingObj != null)
+                return s_rotatingObj.GetHashCode();
+            return 0;
+        }
+    }
+
     private static Quaternion s_originalRotation;
     private static Attachments s_originalAttachments;
     private static int s_oldLayer;
@@ -23,8 +33,8 @@ public class GizmoRaycaster : MonoBehaviour
     public void SwitchMode(int mode)
     {
         Rotating = false;
-        if (s_rotatingObj!= null)
-            s_rotatingObj.gameObject.layer = s_oldLayer;
+        if (s_rotatingObj != null)
+            s_rotatingObj.RestoreProxiesLayers();
         switch (mode)
         {
             case 1:
@@ -47,22 +57,13 @@ public class GizmoRaycaster : MonoBehaviour
 
         if (hit.collider.CompareTag("Part"))
         {
-            if (s_rotatingObj != null)
-                s_rotatingObj.gameObject.layer = s_oldLayer;
-            s_oldLayer = hit.collider.gameObject.layer;
-            hit.collider.gameObject.layer = 2;
-            s_rotation.transform.position = hit.collider.transform.position;
-            s_rotation.transform.rotation = hit.collider.transform.rotation;
-            s_rotation.SetActive(true);
-            s_rotatingObj = hit.collider.GetComponent<PartProxy>();
-            s_originalRotation = s_rotatingObj.part.transform.localRotation;
-            s_originalAttachments = s_rotatingObj.part.attachedParts;
+            SetRotatingObject(hit.collider.gameObject);
             return;
         }
         if (!hit.collider.CompareTag("Gizmo")) return;
         Rotating = true;
         s_delta = 0;
-        s_originalRotation = s_rotatingObj.part.transform.localRotation;
+        s_originalRotation = s_rotatingObj.transform.localRotation;
         if (hit.collider.name.ToLower() == "x")
             s_axis = 0;
         else if (hit.collider.name.ToLower() == "y")
@@ -71,20 +72,33 @@ public class GizmoRaycaster : MonoBehaviour
             s_axis = 2;
         Rotate(s_axis);
     }
+    public static void SetRotatingObject(GameObject o)
+    {
+            if (s_rotatingObj != null)
+                s_rotatingObj.RestoreProxiesLayers();
+            s_rotatingObj = o.GetComponent<PartProxy>().part;
+            s_rotatingObj.SaveProxiesLayers();
+            s_rotatingObj.SetProxiesLayer(2);
+            s_rotation.transform.position = o.transform.position;
+            s_rotation.transform.rotation = o.transform.rotation;
+            s_rotation.SetActive(true);
+            s_originalRotation = s_rotatingObj.transform.localRotation;
+            s_originalAttachments = s_rotatingObj.attachedParts;
+    }
     static void Rotate(int axis)
     {
-        var parts = s_rotatingObj.part.attachedParts;
-        parts[s_rotatingObj.part.parentFace] = false;
+        var parts = s_rotatingObj.attachedParts;
+        parts[s_rotatingObj.parentFace] = false;
         if (axis == 0)
-            s_rotatingObj.part.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0, 0));
+            s_rotatingObj.transform.Rotate(new Vector3(Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0, 0));
         else if (axis == 1)
-            s_rotatingObj.part.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
+            s_rotatingObj.transform.Rotate(new Vector3(0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90, 0));
         else
-            s_rotatingObj.part.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
+            s_rotatingObj.transform.Rotate(new Vector3(0, 0, Input.GetKey(KeyCode.LeftShift) ? -90 : 90));
         //This is a pretty dumb fix but it should work
-        var body = s_rotatingObj.part.Joint.connectedBody;
-        Destroy(s_rotatingObj.part.Joint);
-        (s_rotatingObj.part.Joint = s_rotatingObj.gameObject.AddComponent<FixedJoint>()).connectedBody = body;
+        var body = s_rotatingObj.Joint.connectedBody;
+        Destroy(s_rotatingObj.Joint);
+        (s_rotatingObj.Joint = s_rotatingObj.gameObject.AddComponent<FixedJoint>()).connectedBody = body;
         CarGame.Vehicle.Editor.HistoryManager.ProcessChange("Rotating a part");
     }
 }

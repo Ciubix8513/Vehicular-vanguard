@@ -65,7 +65,7 @@ public class Part : MonoBehaviour
     public Dictionary<string, Tuple<KeyCode, int>> binds = new();
     public List<PartProxy> Proxies;
     public FixedJoint Joint;
-
+    List<int> _proxiesLayersMemory;
 
     public void TakeDamage(int dmg) => health -= dmg;
     public delegate void ActionDel();
@@ -79,6 +79,15 @@ public class Part : MonoBehaviour
     {
         partData = partScriptable?.data;
         Proxies = GetComponentsInChildren<PartProxy>().ToList();
+        //An additional save to avoid null reference exceptions (just in case)
+        SaveProxiesLayers();
     }
-    public void SetProxiesLayer(int layer) => Proxies.ForEach(_ => _.gameObject.layer = layer); 
+    public void SaveProxiesLayers() => _proxiesLayersMemory = Proxies.Select(_ => _.gameObject.layer).ToList();
+    public void RestoreProxiesLayers()
+    {
+        for (int i = 0; i < Proxies.Count; i++)
+            Proxies[i].gameObject.layer = _proxiesLayersMemory[i];
+    }
+
+    public void SetProxiesLayer(int layer) => Proxies.ForEach(_ => _.gameObject.layer = layer);
 }

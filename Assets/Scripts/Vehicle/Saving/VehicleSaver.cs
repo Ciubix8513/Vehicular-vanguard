@@ -35,7 +35,7 @@ namespace CarGame.Vehicle.Saving
             return new(
                 SerializeVehicle(root),
                 InputManager.editorMode,
-                InputMenu.SelectedId);
+                InputManager.editorMode == EditorMode.rotate ? GizmoRaycaster.RotatingObjectId : InputMenu.SelectedId);
         }
 
         public static void SaveVehicle(Vehicle v, string name)
@@ -64,7 +64,10 @@ namespace CarGame.Vehicle.Saving
             return v;
         }
         public static (Part?, Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>
-            (GenerateVehicle(v.Vehicle, parent, new List<int>() { v.SelectedPartId }, out List<Part> o), o.Count() == 0 ? null : o[0]);
+            (GenerateVehicle(v.Vehicle,
+                             parent,
+                             new List<int>() { v.SelectedPartId },
+                             out List<Part> o), o?.Count() == 0 ? null : o?[0]);
 
         //Generates a vehicle from serialized data, returns the Part component of the root
         public static Part? GenerateVehicle(Vehicle v, Transform parent,

@@ -55,11 +55,18 @@ namespace CarGame.Vehicle.Editor
             Root = res.Item1;
             InputManager.SetGameCameraTarget(Root.transform.parent);
             HistoryChangedEvent();
-            if (s_history[index].EditorMode != EditorMode.input) return;
-            print("Loading history vehicle in input mode");
-            UIManager.ActivateTab(1);
-            InputMenu.s_this.OnMenuOpen();
-            InputMenu.s_this.LoadData(res.Item2, true);
+            if (s_history[index].EditorMode == EditorMode.input)
+            {
+                print("Loading history vehicle in input mode");
+                UIManager.ActivateTab(1);
+                InputMenu.s_this.OnMenuOpen();
+                InputMenu.s_this.LoadData(res.Item2, true);
+            }
+            else if(s_history[index].EditorMode == EditorMode.rotate && InputManager.editorMode == EditorMode.rotate)
+            {
+                UIManager.ActivateTab(0);
+                GizmoRaycaster.SetRotatingObject(res.Item2.gameObject);
+            }
         }
 
         void Awake()
