@@ -1,10 +1,19 @@
 using System.Collections.Generic;
+using CarGame.UI.Utils;
 using UnityEngine;
 
 namespace CarGame.UI
 {
     public class UIManager : MonoBehaviour
     {
+        //Prefabs
+        [SerializeField]
+        private GameObject _modal;
+        public static GameObject ModalPrefab;
+        //Local objects
+        [SerializeField]
+        private GameObject _canvas;
+        public static GameObject MainCanvas;
         [SerializeField]
         private List<GameObject> _editorTabs;
         public static List<GameObject> EditorTabs;
@@ -16,9 +25,11 @@ namespace CarGame.UI
         public static List<UnityEngine.UI.Button> EditorButtons;
         void Awake()
         {
+            ModalPrefab =_modal;
             EditorTabs = _editorTabs;
             EditorUI = _editorUI;
             EditorButtons = _editorButtons;
+            MainCanvas = _canvas;
         }
         public static void ActivateTab(uint tab)
         {
