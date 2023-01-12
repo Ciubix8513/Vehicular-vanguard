@@ -45,6 +45,11 @@ namespace CarGame.Vehicle
             for (int i = 0; i < Proxies.Count; i++)
                 Proxies[i].gameObject.layer = _proxiesLayersMemory[i];
         }
-        public void SetProxiesLayer(int layer) => Proxies.ForEach(_ => _.gameObject.layer = layer);
+        public void SetProxiesLayer(int layer, bool save = false)
+        {
+            if (save)
+                SaveProxiesLayers();
+            Proxies.ForEach(_ => _.gameObject.layer = layer);
+        }
     }
 }

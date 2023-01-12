@@ -18,7 +18,7 @@ namespace CarGame.Vehicle.Editor.UI
         [SerializeField]
         TextMeshProUGUI _descText;
         //----Data----
-        private List<GameObject> _parts = new();
+        private List<Part> _parts = new();
         private static Camera s_camera;
         public static InputMenu s_this;
         private Part _part = null;
@@ -34,14 +34,8 @@ namespace CarGame.Vehicle.Editor.UI
         public void OnMenuOpen()
         {
             _originalLayers = new();
-            // _parts = GameObject.FindGameObjectsWithTag("Part").ToList().Where(part => part.GetComponent<PartProxy>().Activatable).ToList().ConvertAll(part => { _originalLayers.Add(part.GetInstanceID(), part.layer); part.layer = 6; return part; });
-            _parts = FindObjectsOfType<PartProxy>().Where(_ => _.Activatable)
-                .Select(_ =>
-                {
-                    _originalLayers.Add(_.GetInstanceID(), _.gameObject.layer);
-                    _.gameObject.layer = 6;
-                    return _.gameObject;
-                }).ToList();
+            _parts = FindObjectsOfType<Part>().Where(_ => _.Activatable).ToList();
+            _parts.ForEach(_=>_.SetProxiesLayer(6,true));
             foreach (Transform c in _actionParent.transform)
                 Destroy(c.gameObject);
             _nameText.text = _descText.text = "";
@@ -50,7 +44,9 @@ namespace CarGame.Vehicle.Editor.UI
         }
         public void OnMenuClose()
         {
-            _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
+            print("Called on menu close");
+            // _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
+            _parts.Where(_=>_!=null).ToList().ForEach(_ => _.RestoreProxiesLayers());
             _selected = false;
             s_selectedId = 0;
         }
