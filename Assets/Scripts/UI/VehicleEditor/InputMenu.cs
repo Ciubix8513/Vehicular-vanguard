@@ -42,13 +42,22 @@ namespace CarGame.Vehicle.Editor.UI
             _selected = false;
             s_selectedId = 0;
         }
-        public void OnMenuClose()
+        public void OnMenuClose(bool deselect)
         {
             print("Called on menu close");
             // _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
             _parts.Where(_=>_!=null).ToList().ForEach(_ => _.RestoreProxiesLayers());
+            if(!deselect)return;
             _selected = false;
             s_selectedId = 0;
+        }
+        public void RestoreClosed()
+        {
+            if(InputManager.editorMode != EditorMode.input)return;
+            var selBack = _selected;
+            OnMenuOpen();
+            if(selBack)
+            LoadData(_part,false);
         }
         public static void DoRaycast()
         {
