@@ -49,7 +49,6 @@ namespace CarGame.Player
         void Awake() => s_this = this;
         void ProcessEK()
         {
-            Debug.Log("Processing Editor key");
             if (mode == Mode.menu) return;
             if (mode == Mode.editor)
             {

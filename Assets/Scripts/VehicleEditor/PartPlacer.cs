@@ -12,7 +12,6 @@ namespace CarGame.Vehicle.Editor
                 return;
             if (!hit.collider.CompareTag("Part"))
                 return;
-            Debug.Log($"Should be dragging {hit.collider.gameObject.name}");
             var p = hit.collider.GetComponent<PartProxy>().part;
             if (p.isRoot) return;
             UICursor.IsDragging = true;

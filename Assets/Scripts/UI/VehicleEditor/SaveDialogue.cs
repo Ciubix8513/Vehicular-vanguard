@@ -34,7 +34,6 @@ namespace CarGame.Vehicle.Editor.UI
             }
             else
             {
-                print("File exists");
                 var modal = Instantiate(UIManager.ModalPrefab,UIManager.MainCanvas.transform).GetComponent<Modal>();
                 modal.Init("File already exists\nReplace?");
                 yield return new WaitUntil(() => modal.ButtonPressed);

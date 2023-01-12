@@ -51,11 +51,7 @@ namespace CarGame.Vehicle.Editor.UI
         public void SaveAll()
         {
             if (_parent == null)
-            {
-                print("Parent was null");
                 return;
-            }
-            print("Saving after controls changes");
             _parent.SaveActions();
             HistoryManager.ProcessChange("Action cell change");
         }

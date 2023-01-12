@@ -44,8 +44,6 @@ namespace CarGame.Vehicle.Editor.UI
         }
         public void OnMenuClose(bool deselect)
         {
-            print("Called on menu close");
-            // _parts.Where(x => x != null).ToList().ForEach(part => part.layer = _originalLayers[part.GetInstanceID()]);
             _parts.Where(_=>_!=null).ToList().ForEach(_ => _.RestoreProxiesLayers());
             if(!deselect)return;
             _selected = false;
@@ -74,7 +72,6 @@ namespace CarGame.Vehicle.Editor.UI
                 SaveActions();
             _selected = true;
             s_selectedId = part.GetHashCode();
-            Debug.Log($"Loading data for part {part.partData.name}");
             _part?.SetProxiesLayer(6);
             _part = part;
             part.SetProxiesLayer(9);
@@ -94,10 +91,7 @@ namespace CarGame.Vehicle.Editor.UI
         end:
             SaveActions();
             if (!ignoreHistory)
-            {
-                // print("Making additional save when loading data");
                 HistoryManager.ProcessChange("Input menu part loading");
-            }
         }
         public void SaveActions()
         {

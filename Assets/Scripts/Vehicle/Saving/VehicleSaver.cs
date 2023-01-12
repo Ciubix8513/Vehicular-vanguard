@@ -32,14 +32,10 @@ namespace CarGame.Vehicle.Saving
                 c.binds)));
             return v;
         }
-        public static HistoryVehicle SerializeHistoryVehicle(Part root)
-        {
-            Debug.Log("Serialized history vehicle in " + InputManager.editorMode + " mode");
-            return new(
+        public static HistoryVehicle SerializeHistoryVehicle(Part root) => new(
                 SerializeVehicle(root),
                 InputManager.editorMode,
                 InputManager.editorMode == EditorMode.rotate ? GizmoRaycaster.RotatingObjectId : InputMenu.SelectedId);
-        }
 
         public static void SaveVehicle(Vehicle v, string name)
         {

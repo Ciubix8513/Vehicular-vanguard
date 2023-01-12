@@ -68,7 +68,6 @@ namespace CarGame.Vehicle.Parts
             WheelCollider.steerAngle = Mathf.Lerp(WheelCollider.steerAngle, _targetAngle, TurningSpeed);
             WheelCollider.motorTorque = Mathf.Lerp(WheelCollider.motorTorque, _targetTorque, Acceleration);
             WheelCollider.brakeTorque = Mathf.Lerp(WheelCollider.brakeTorque, _targetBreak, _breakAcceleration);
-            Debug.Log($"Motor torque:{WheelCollider.motorTorque}");
             WheelCollider.GetWorldPose(out var pos, out var rot);
             _wheelMesh.position = pos;
             _wheelMesh.rotation = rot;

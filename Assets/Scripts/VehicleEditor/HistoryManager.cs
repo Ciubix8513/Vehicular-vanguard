@@ -53,14 +53,12 @@ namespace CarGame.Vehicle.Editor
         }
         static void Generate(int index)
         {
-            print("Trying to generate for " + index + " length = " + s_history.Count);
             var res = VehicleSaver.GenerateHistoryVehicle(s_history[index], s_vehicleRoot);
             Root = res.Item1;
             InputManager.SetGameCameraTarget(Root.transform.parent);
             HistoryChangedEvent();
             if (s_history[index].EditorMode == EditorMode.input)
             {
-                print("Loading history vehicle in input mode");
                 UIManager.ActivateTab(1);
                 InputMenu.s_this.OnMenuOpen();
                 InputMenu.s_this.LoadData(res.Item2, true);
