@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CarGame.Vehicle.Saving
@@ -28,5 +29,8 @@ namespace CarGame.Vehicle.Saving
         public Attachments RootOccupiedFaces;
         public List<PartSaveStruct> Parts;
         public byte[] PreviewImage;
+        //While I can get these from file names, i'm gonna add them here just for some extra convenience
+        public string CreationDate;
+        public string Name;
     }
 }

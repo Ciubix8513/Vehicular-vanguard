@@ -25,7 +25,8 @@ namespace CarGame.Vehicle.Editor.UI
         }
         private IEnumerator ok()
         {
-            var path = Application.persistentDataPath + $"/Vehicles/{_input.text}.vehicle";
+            var name = _input.text;
+            var path = Application.persistentDataPath + $"/Vehicles/{name}.vehicle";
             var vehicle = FindObjectsOfType<Part>().Where(_ => _.isRoot).First();
             if (!File.Exists(path))
             {
@@ -34,6 +35,8 @@ namespace CarGame.Vehicle.Editor.UI
                 yield return null;
                 _camera.gameObject.SetActive(false);
                 var v = Saving.VehicleSaver.SerializeVehicle(vehicle, true, _camera.activeTexture);
+                v.CreationDate = System.DateTime.Now.ToString();
+                v.Name = name;
                 Saving.VehicleSaver.SaveVehicle(v, _input.text);
                 yield return null;
             }
@@ -49,6 +52,8 @@ namespace CarGame.Vehicle.Editor.UI
                     yield return null;
                     _camera.gameObject.SetActive(false);
                     var v = Saving.VehicleSaver.SerializeVehicle(vehicle, true, _camera.activeTexture);
+                    v.CreationDate = System.DateTime.Now.ToString();
+                    v.Name = name;
                     Saving.VehicleSaver.SaveVehicle(v, _input.text);
                 }
                 Destroy(modal.gameObject);
