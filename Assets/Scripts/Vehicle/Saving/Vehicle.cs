@@ -27,5 +27,6 @@ namespace CarGame.Vehicle.Saving
         public int RootSaveID;
         public Attachments RootOccupiedFaces;
         public List<PartSaveStruct> Parts;
+        public byte[] PreviewImage;
     }
 }

@@ -46,6 +46,7 @@ namespace CarGame.Player
         [SerializeField]
         private Transform _mainCamera;
         private static InputManager s_this;
+        public static bool BlockLmb;
         void Awake() => s_this = this;
         void ProcessEK()
         {
@@ -80,12 +81,15 @@ namespace CarGame.Player
         {
             if (UICursor.IsDragging && Input.GetMouseButtonUp(0))
                 UICursor.EndDragging();
-            if (!UICursor.IsDragging && Input.GetMouseButtonDown(0) && editorMode == EditorMode.place)
-                PartPlacer.DoEditorRaycast();
-            if (Input.GetMouseButtonDown(0))
-                GizmoRaycaster.Raycast();
-            if (editorMode == EditorMode.input && Input.GetMouseButtonDown(0))
-                InputMenu.DoRaycast();
+            if (!BlockLmb)
+            {
+                if (!UICursor.IsDragging && Input.GetMouseButtonDown(0) && editorMode == EditorMode.place)
+                    PartPlacer.DoEditorRaycast();
+                if (Input.GetMouseButtonDown(0))
+                    GizmoRaycaster.Raycast();
+                if (editorMode == EditorMode.input && Input.GetMouseButtonDown(0))
+                    InputMenu.DoRaycast();
+            }
             if (GizmoRaycaster.Rotating && Input.GetMouseButtonUp(0))
                 GizmoRaycaster.Rotating = false;
             if (!UICursor.IsDragging)

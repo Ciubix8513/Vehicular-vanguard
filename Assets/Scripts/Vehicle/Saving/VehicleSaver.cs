@@ -12,7 +12,7 @@ namespace CarGame.Vehicle.Saving
     public class VehicleSaver
     {
         //Save a vehicle based on the root
-        public static Vehicle SerializeVehicle(Part root)
+        public static Vehicle SerializeVehicle(Part root, bool saveImage = false, RenderTexture source = null)
         {
             Vehicle v = new(
                 Application.version,
@@ -30,6 +30,18 @@ namespace CarGame.Vehicle.Saving
                 c.parentPart.GetHashCode(),
                 c.attachedParts,
                 c.binds)));
+            if (!saveImage)
+                return v;
+            if (source == null)
+            {
+                Debug.LogError("Image source must not be null");
+                return v;
+            }
+            Texture2D tex = new Texture2D(source.width,source.height,TextureFormat.RGB24,false);
+            RenderTexture.active = source;
+            tex.ReadPixels(new Rect(0,0,source.width,source.height),0,0);
+            tex.Apply();
+            v.PreviewImage = tex.EncodeToPNG();
             return v;
         }
         public static HistoryVehicle SerializeHistoryVehicle(Part root) => new(
