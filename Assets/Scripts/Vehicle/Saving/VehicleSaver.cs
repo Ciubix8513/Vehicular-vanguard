@@ -15,7 +15,7 @@ namespace CarGame.Vehicle.Saving
         public static Vehicle SerializeVehicle(Part root, bool saveImage = false, RenderTexture source = null)
         {
             Vehicle v = new(
-                Application.version,
+                 new Version(Application.version),
                 new(root.transform),
                 root.partData.ID,
                 root.GetHashCode(),
@@ -37,9 +37,9 @@ namespace CarGame.Vehicle.Saving
                 Debug.LogError("Image source must not be null");
                 return v;
             }
-            Texture2D tex = new Texture2D(source.width,source.height,TextureFormat.RGB24,false);
+            Texture2D tex = new Texture2D(source.width, source.height, TextureFormat.RGB24, false);
             RenderTexture.active = source;
-            tex.ReadPixels(new Rect(0,0,source.width,source.height),0,0);
+            tex.ReadPixels(new Rect(0, 0, source.width, source.height), 0, 0);
             tex.Apply();
             v.PreviewImage = tex.EncodeToPNG();
             return v;
@@ -57,9 +57,11 @@ namespace CarGame.Vehicle.Saving
                 Directory.CreateDirectory(Dir);
             File.WriteAllText(Dir + $"{name}.vehicle", json);
         }
-        public static Vehicle LoadVehicle(string name)
+        public static Vehicle LoadVehicle(string name, bool isPath = false)
         {
             var path = Application.persistentDataPath + $"/Vehicles/{name}.vehicle";
+            if (isPath)
+                path = name;
             if (!File.Exists(path))
             {
                 Debug.LogError($"File {path} does not exist");
@@ -67,11 +69,6 @@ namespace CarGame.Vehicle.Saving
             }
             var json = File.ReadAllText(path);
             var v = JsonUtility.FromJson<Vehicle>(json);
-            if (v.Version != Application.version)
-            {
-                Debug.LogError("Cannot load a file created in a different version");
-                return null;
-            }
             return v;
         }
         public static (Part?, Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>

@@ -6,7 +6,7 @@ namespace CarGame.Vehicle.Saving
     //Making it a class so there's less copying
     public class Vehicle
     {
-        public Vehicle(string version,
+        public Vehicle(Version version,
                        TransformData rootTransform,
                        string rootID,
                        int rootSaveID,
@@ -21,7 +21,7 @@ namespace CarGame.Vehicle.Saving
             RootOccupiedFaces = rootOccupiedFaces;
         }
 
-        public string Version;
+        public Version Version;
         public TransformData RootTransform;
         public string RootID;
         public int RootSaveID;
