@@ -2,6 +2,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.IO;
+using CarGame.Vehicle.Saving;
+using System.Linq;
+using CarGame.Player;
 
 namespace CarGame.Vehicle.Editor.UI
 {
@@ -13,13 +16,27 @@ namespace CarGame.Vehicle.Editor.UI
         TextMeshProUGUI _date;
         [SerializeField]
         Image _image;
-        public Saving.Vehicle vehicle;
+        public GameObject Outline;
+        private Saving.Vehicle vehicle;
         LoadDialogue parent;
         public void Delete()
         {
             File.Delete(vehicle.FileName);
             parent.LoadSaves();
         }
+        public void Load()
+        {
+            var Root = VehicleSaver.GenerateVehicle(
+            vehicle,
+            FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent,
+            null,
+            out var n);
+            InputManager.SetGameCameraTarget(Root.transform);
+            HistoryManager.Root = Root;
+            HistoryManager.ResetHistory();
+            parent.gameObject.SetActive(false);
+        }
+        public void Select() => parent.SelectedItem = this;
         public LoadingMenuItem Init(Saving.Vehicle v, LoadDialogue par)
         {
             Texture2D tex = new(1, 1);
