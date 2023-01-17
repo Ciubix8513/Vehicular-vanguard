@@ -10,7 +10,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.7.4",
+      "version": "1.8.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -81,7 +81,7 @@
       "source": "builtin",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
-        "com.unity.burst": "1.7.3",
+        "com.unity.burst": "1.8.2",
         "com.unity.render-pipelines.core": "14.0.4",
         "com.unity.shadergraph": "14.0.4"
       }
@@ -94,7 +94,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.6.0",
+      "version": "1.7.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {

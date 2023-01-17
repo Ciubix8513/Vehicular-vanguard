@@ -69,6 +69,7 @@ namespace CarGame.Vehicle.Saving
             }
             var json = File.ReadAllText(path);
             var v = JsonUtility.FromJson<Vehicle>(json);
+            v.FileName = path;
             return v;
         }
         public static (Part?, Part?) GenerateHistoryVehicle(HistoryVehicle v, Transform parent) =>

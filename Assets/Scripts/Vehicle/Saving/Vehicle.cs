@@ -32,5 +32,6 @@ namespace CarGame.Vehicle.Saving
         //While I can get these from file names, i'm gonna add them here just for some extra convenience
         public string CreationDate;
         public string Name;
+        public string FileName;
     }
 }
