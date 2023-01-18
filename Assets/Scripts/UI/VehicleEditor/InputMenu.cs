@@ -72,7 +72,8 @@ namespace CarGame.Vehicle.Editor.UI
                 SaveActions();
             _selected = true;
             s_selectedId = part.GetHashCode();
-            _part?.SetProxiesLayer(6);
+            if(_part != null)
+            _part.SetProxiesLayer(6);
             _part = part;
             part.SetProxiesLayer(9);
             _nameText.text = _part.partData.name;

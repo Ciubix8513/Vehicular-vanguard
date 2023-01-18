@@ -31,6 +31,7 @@ namespace CarGame.Vehicle.Editor
         public void SwitchMode(int mode)
         {
             Rotating = false;
+            if(s_rotation)
             s_rotatingObj?.RestoreProxiesLayers();
             switch (mode)
             {
@@ -69,7 +70,8 @@ namespace CarGame.Vehicle.Editor
         }
         public static void SetRotatingObject(GameObject o)
         {
-            s_rotatingObj?.RestoreProxiesLayers();
+            if(s_rotatingObj != null)
+                s_rotatingObj?.RestoreProxiesLayers();
             s_rotatingObj = o.GetComponent<PartProxy>().part;
             s_rotatingObj.SaveProxiesLayers();
             s_rotatingObj.SetProxiesLayer(2);

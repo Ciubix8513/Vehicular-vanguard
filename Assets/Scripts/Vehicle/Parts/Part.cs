@@ -22,6 +22,7 @@ namespace CarGame.Vehicle
         public Dictionary<string, Tuple<KeyCode, int>> binds = new();
         public List<PartProxy> Proxies;
         public FixedJoint Joint;
+        [SerializeField]
         List<int> _proxiesLayersMemory;
 
         public void TakeDamage(int dmg) => health -= dmg;
