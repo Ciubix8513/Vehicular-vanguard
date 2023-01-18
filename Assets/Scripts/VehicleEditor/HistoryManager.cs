@@ -68,6 +68,11 @@ namespace CarGame.Vehicle.Editor
                 UIManager.ActivateTab(0);
                 GizmoRaycaster.SetRotatingObject(res.Item2.gameObject);
             }
+            else
+            {
+                UIManager.ActivateTab(0);
+                InputMenu.s_this.OnMenuClose(true);
+            }
         }
 
         void Awake()
