@@ -289,14 +289,15 @@ MonoBehaviour:
   isActive: 0
   Proxies: []
   Joint: {fileID: 0}
+  _proxiesLayersMemory: 
   _wheelMesh: {fileID: 1692867630582437547}
   WheelCollider: {fileID: 2346294661115076249}
   HasMotor: 1
   CanSteer: 0
-  LeftMax: -45
-  RightMax: 45
+  LeftMax: -10
+  RightMax: 10
   TurningSpeed: 0.1
-  MaxTorque: -5000
+  MaxTorque: -1000
   Acceleration: 0.1
   CanBreak: 1
   MaxBreakTorque: 100
