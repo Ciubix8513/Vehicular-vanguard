@@ -58,7 +58,7 @@ namespace CarGame.Vehicle.Editor.UI
             _input.text = "";
             gameObject.SetActive(false);
         }
-        void OnEnable() => InputManager.BlockLmb = true;
-        void OnDisable() => InputManager.BlockLmb = false;
+        void OnEnable() => InputManager.IgnoreInputs = true;
+        void OnDisable() => InputManager.IgnoreInputs = false;
     }
 }
