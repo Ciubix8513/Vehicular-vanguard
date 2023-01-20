@@ -57,16 +57,9 @@ namespace CarGame.Vehicle.Editor.UI
 
         public void Save()
         {
-            if (_dropdown.value == _downOption)
-            {
-                PartGroups.DownGroup.Add(_key, (del, _part.GetInstanceID()));
-                if (!_part.binds.ContainsKey(Name.text))
-                    _part.binds.Add(Name.text, new(_key, 0));
-                return;
-            }
-            PartGroups.UpGroup.Add(_key, (del, _part.GetInstanceID()));
+            PartGroups.Instance[_dropdown.value].Add(_key, (del, _part.GetInstanceID()));
             if (!_part.binds.ContainsKey(Name.text))
-                _part.binds.Add(Name.text, new(_key, 1));
+                _part.binds.Add(Name.text, new(_key, _dropdown.value));
         }
     }
 }

@@ -89,8 +89,8 @@ namespace CarGame.Vehicle.Saving
             parent.Cast<Transform>().ToList().ForEach(_ =>
             {
                 //Remove the key binds
-                PartGroups.DownGroup.RemoveAllByInstanceId(_.gameObject.GetInstanceID());
-                PartGroups.UpGroup.RemoveAllByInstanceId(_.gameObject.GetInstanceID());
+                PartGroups.Instance[0].RemoveAllByInstanceId(_.gameObject.GetInstanceID());
+                PartGroups.Instance[1].RemoveAllByInstanceId(_.gameObject.GetInstanceID());
                 Object.Destroy(_.gameObject);
             });
             var rootData = PartDictionary.Parts[v.RootID];
@@ -122,11 +122,7 @@ namespace CarGame.Vehicle.Saving
                 var act = p.GetActions().ToDictionary(_ => _.Key, _ => _.Delegate);
                 _.Binds.ForEach(_ =>
                 {
-                    //0 = Down, 1 = up
-                    if (_.Action == 0)
-                        PartGroups.DownGroup.Add(_.Key, (act[_.Key], p.gameObject.GetInstanceID()));
-                    else if (_.Action == 1)
-                        PartGroups.UpGroup.Add(_.Key, (act[_.Key], p.gameObject.GetInstanceID()));
+                    PartGroups.Instance[_.Action].Add(_.Key, (act[_.Key], p.gameObject.GetInstanceID()));
                     p.binds.Add(_.Name, new(_.Key, _.Action));
                 });
             });

@@ -87,8 +87,8 @@ namespace CarGame.Vehicle.Editor.UI
                 Quaternion.identity,
                 _actionParent.transform).GetComponent<ActionCell>().Init(a, _part, this));
             if (_part.binds.Count == 0) goto end;
-            PartGroups.DownGroup.RemoveAllByInstanceId(_part.GetInstanceID());
-            PartGroups.UpGroup.RemoveAllByInstanceId(_part.GetInstanceID());
+            PartGroups.Instance[0].RemoveAllByInstanceId(_part.GetInstanceID());
+            PartGroups.Instance[1].RemoveAllByInstanceId(_part.GetInstanceID());
             _part.binds.Clear();
         end:
             SaveActions();

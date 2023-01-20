@@ -108,10 +108,10 @@ namespace CarGame.Player
         }
         void ProcessGameModeKeys()
         {
-            PartGroups.DownGroup.group.Select(x => (x.Key, x.Value))
+            PartGroups.Instance[0].group.Select(x => (x.Key, x.Value))
                                       .ToList()
                                       .ForEach(x => { if (Input.GetKeyDown(x.Key)) x.Value.ForEach(y => y.Item1()); });
-            PartGroups.UpGroup.group.Select(x => (x.Key, x.Value))
+            PartGroups.Instance[1].group.Select(x => (x.Key, x.Value))
                                     .ToList()
                                     .ForEach(x => { if (Input.GetKeyUp(x.Key)) x.Value.ForEach(y => y.Item1()); });
         }
