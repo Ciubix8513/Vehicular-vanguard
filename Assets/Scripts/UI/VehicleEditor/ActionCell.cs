@@ -17,18 +17,18 @@ namespace CarGame.Vehicle.Editor.UI
         [SerializeField]
         int _downOption;
         private InputMenu _parent;
-        public void Init(System.Tuple<Part.ActionDel, string, KeyCode, int> tuple, Part p, InputMenu par)
+        public void Init(ActionData data, Part p, InputMenu par)
         {
             _parent = par;
-            Name.text = tuple.Item2;
-            del = tuple.Item1;
-            _key = tuple.Item3;
-            _dropdown.SetValueWithoutNotify(tuple.Item4);
+            Name.text = data.Name;
+            del = data.Delegate;
+            _key = data.Key;
+            _dropdown.SetValueWithoutNotify(data.ActionType);
             _part = p;
             _keyText.text = _key.ToString();
             if (p.binds.Count == 0) return;
-            _key = p.binds[tuple.Item2].Item1;
-            _dropdown.value = p.binds[tuple.Item2].Item2;
+            _key = p.binds[data.Name].Item1;
+            _dropdown.value = p.binds[data.Name].Item2;
             _keyText.text = _key.ToString();
         }
 

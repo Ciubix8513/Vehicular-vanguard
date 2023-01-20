@@ -8,15 +8,15 @@ namespace CarGame.Vehicle.Saving
     [Serializable]
     public struct BindsStruct
     {
-        public string Item1;
-        public KeyCode Item2;
-        public int Item3;
+        public string Name;
+        public KeyCode Key;
+        public int Action;
 
         public BindsStruct(string item1, Tuple<KeyCode , int> item2)
         {
-            Item1 = item1;
-            Item2 = item2.Item1;
-            Item3 = item2.Item2;
+            Name = item1;
+            Key = item2.Item1;
+            Action = item2.Item2;
         }
     }
     [Serializable]
@@ -28,7 +28,6 @@ namespace CarGame.Vehicle.Saving
         public string ID;
         public int AttachedPartID;
         public Attachments OccupiedFaces;
-        // public Dictionary<string, Tuple<KeyCode, int>> Binds;
         public List<BindsStruct> Binds;
 
         public PartSaveStruct(int saveID, TransformData transform, string iD, int attachedPartID, Attachments occupiedFaces, Dictionary<string, Tuple<KeyCode, int>> binds)

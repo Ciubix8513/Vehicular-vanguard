@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,27 +40,27 @@ namespace CarGame.Vehicle.Parts
         private float _targetBreak;
         public void StartBreak() => _targetBreak = MaxBreakTorque;
         public void StopBreak() => _targetBreak = 0.0f;
-        public override List<Tuple<ActionDel, string, KeyCode, int>> GetActions()
+        public override List<ActionData> GetActions()
         {
-            List<Tuple<ActionDel, string, KeyCode, int>> o = new();
+            List<ActionData> _ = new();
             if (CanSteer)
             {
-                o.Add(new(SteerLeft, "Steer left", KeyCode.A, 0));
-                o.Add(new(SteerRight, "Steer right", KeyCode.D, 0));
-                o.Add(new(StopSteerLeft, "Stop steer left", KeyCode.A, 1));
-                o.Add(new(StopSteerRight, "Stop steer right", KeyCode.D, 1));
+                _.Add(new(SteerLeft, "Steer left", KeyCode.A, 0));
+                _.Add(new(SteerRight, "Steer right", KeyCode.D, 0));
+                _.Add(new(StopSteerLeft, "Stop steer left", KeyCode.A, 1));
+                _.Add(new(StopSteerRight, "Stop steer right", KeyCode.D, 1));
             }
             if (HasMotor)
             {
-                o.Add(new(Activate, "Turn on motor", KeyCode.W, 0));
-                o.Add(new(DeActivate, "Turn off motor", KeyCode.W, 1));
+                _.Add(new(Activate, "Turn on motor", KeyCode.W, 0));
+                _.Add(new(DeActivate, "Turn off motor", KeyCode.W, 1));
             }
             if (CanBreak)
             {
-                o.Add(new(StartBreak, "Turn on breaks", KeyCode.S, 0));
-                o.Add(new(StopBreak, "Turn off breaks", KeyCode.S, 1));
+                _.Add(new(StartBreak, "Turn on breaks", KeyCode.S, 0));
+                _.Add(new(StopBreak, "Turn off breaks", KeyCode.S, 1));
             }
-            return o;
+            return _;
         }
         private void FixedUpdate()
         {

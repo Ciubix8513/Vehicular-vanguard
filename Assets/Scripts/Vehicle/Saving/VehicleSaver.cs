@@ -119,13 +119,15 @@ namespace CarGame.Vehicle.Saving
                 p.parentPart = lookUp[_.AttachedPartID];
                 if (p.parentPart == null) return;
                 (p.Joint = p.gameObject.AddComponent<FixedJoint>()).connectedBody = p.parentPart.GetComponent<Rigidbody>();
-                var act = p.GetActions().ToDictionary(_ => _.Item2, _ => _.Item1);
+                var act = p.GetActions().ToDictionary(_ => _.Key, _ => _.Delegate);
                 _.Binds.ForEach(_ =>
                 {
                     //0 = Down, 1 = up
-                    if (_.Item3 == 0) PartGroups.DownGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
-                    else PartGroups.UpGroup.Add(_.Item2, (act[_.Item1], p.gameObject.GetInstanceID()));
-                    p.binds.Add(_.Item1, new(_.Item2, _.Item3));
+                    if (_.Action == 0)
+                        PartGroups.DownGroup.Add(_.Key, (act[_.Key], p.gameObject.GetInstanceID()));
+                    else if (_.Action == 1)
+                        PartGroups.UpGroup.Add(_.Key, (act[_.Key], p.gameObject.GetInstanceID()));
+                    p.binds.Add(_.Name, new(_.Key, _.Action));
                 });
             });
             return root;
