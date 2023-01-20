@@ -23,8 +23,8 @@ namespace CarGame.Vehicle.Editor.UI
         public static bool IsOverUI;
         void Awake()
         {
-            UICursor.s_text = _localText;
-            UICursor.s_image = _localImage;
+            s_text = _localText;
+            s_image = _localImage;
         }
         public static void EnableNameCursor(string name)
         {
@@ -83,8 +83,8 @@ namespace CarGame.Vehicle.Editor.UI
         {
             if (!PartGO.gameObject.activeSelf)
             {
-                PartGroups.DownGroup.RemoveAllByInstanceId(PartGO.GetInstanceID());
-                PartGroups.UpGroup.RemoveAllByInstanceId(PartGO.GetInstanceID());
+                PartGroups.Instance[0].RemoveAllByInstanceId(PartGO.GetInstanceID());
+                PartGroups.Instance[1].RemoveAllByInstanceId(PartGO.GetInstanceID());
                 Destroy(PartGO.gameObject);
             }
             IsDragging = false;
@@ -102,6 +102,18 @@ namespace CarGame.Vehicle.Editor.UI
             PartGO.parentPart = SnappingObject;
             SnappingObject.attachedParts[SnappingFace] = true;
             PartGO.attachedParts[-SnappingFace] = true;
+            if (PartGO.WasPlaced)
+                goto end;
+            PartGO.WasPlaced = true;
+            if (!PartGO.Activatable)
+                goto end;
+            print("Initializing input for a new object");
+            PartGO.GetActions().ForEach(_ =>
+            PartGroups.Instance[_.ActionType].Add(_.Key, (_.Delegate, PartGO.GetInstanceID())));
+
+
+        //Using a goto because it's the simplest way
+        end:
             PartGO = null;
             HistoryManager.ProcessChange("Moving/Creating a part");
         }
