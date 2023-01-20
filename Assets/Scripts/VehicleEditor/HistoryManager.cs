@@ -13,10 +13,6 @@ namespace CarGame.Vehicle.Editor
         public delegate void HistoryHandler();
         public static event HistoryHandler HistoryChangedEvent;
         private static List<HistoryVehicle> s_history;
-        //Just for debugging
-        [SerializeField]
-        private static Transform s_vehicleRoot;
-        public static Part Root;
         //Index to current action
         private static int s_action_index_private;
         public static int HistoryLength
@@ -53,15 +49,15 @@ namespace CarGame.Vehicle.Editor
         }
         static void Generate(int index)
         {
-            var res = VehicleSaver.GenerateHistoryVehicle(s_history[index], s_vehicleRoot);
-            Root = res.Item1;
-            InputManager.SetGameCameraTarget(Root.transform.parent);
+            var res = VehicleSaver.GenerateHistoryVehicle(s_history[index],InputManager.PlayerVehicle.transform);
+            InputManager.PlayerVehicle.Root = res.Item1;
+            InputManager.SetGameCameraTarget(InputManager.PlayerVehicle.transform);
             HistoryChangedEvent();
             if (s_history[index].EditorMode == EditorMode.input)
             {
                 UIManager.ActivateTab(1);
-                InputMenu.s_this.OnMenuOpen();
-                InputMenu.s_this.LoadData(res.Item2, true);
+                InputMenu.Instance.OnMenuOpen();
+                InputMenu.Instance.LoadData(res.Item2, true);
             }
             else if(s_history[index].EditorMode == EditorMode.rotate && InputManager.editorMode == EditorMode.rotate)
             {
@@ -71,7 +67,8 @@ namespace CarGame.Vehicle.Editor
             else
             {
                 UIManager.ActivateTab(0);
-                InputMenu.s_this.OnMenuClose(true);
+                if(InputMenu.Instance != null)
+                InputMenu.Instance.OnMenuClose(true);
             }
         }
 
@@ -82,8 +79,6 @@ namespace CarGame.Vehicle.Editor
         }
         void Start()
         {
-            Root = FindObjectsOfType<Part>().Where(_ => _.isRoot).FirstOrDefault();
-            s_vehicleRoot = Root.transform.parent;
             //Save the initial state 
             ProcessChange("Initial save");
         }
@@ -94,7 +89,7 @@ namespace CarGame.Vehicle.Editor
             //If we're in the past clear all actions ahead
             if (ActionIndex < s_history.Count - 1)
                 s_history.RemoveRange(ActionIndex + 1, s_history.Count - (ActionIndex + 1));
-            s_history.Add(VehicleSaver.SerializeHistoryVehicle(Root));
+            s_history.Add(VehicleSaver.SerializeHistoryVehicle(InputManager.PlayerVehicle.Root));
             s_action_index_private++;
             HistoryChangedEvent();
         }

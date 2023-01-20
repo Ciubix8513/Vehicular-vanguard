@@ -1,4 +1,3 @@
-using System.Linq;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,15 +18,13 @@ namespace CarGame.Vehicle.Editor.UI
         [SerializeField]
         private Camera _camera;
         public void TextChanged() => _ok.interactable = _input.text.Length > 0;
-        public void Ok()
-        {
-            StartCoroutine(ok());
-        }
+        public void Ok() => StartCoroutine(ok());
         private IEnumerator ok()
         {
             var name = _input.text;
             var path = Application.persistentDataPath + $"/Vehicles/{name}.vehicle";
-            var vehicle = FindObjectsOfType<Part>().Where(_ => _.isRoot).First();
+            // var vehicle = FindObjectsOfType<Part>().Where(_ => _.isRoot).First();
+            var vehicle = InputManager.PlayerVehicle.Root;
             if (!File.Exists(path))
             {
                 _camera.gameObject.SetActive(true);

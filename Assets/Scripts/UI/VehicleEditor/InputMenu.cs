@@ -20,16 +20,17 @@ namespace CarGame.Vehicle.Editor.UI
         //----Data----
         private List<Part> _parts = new();
         private static Camera s_camera;
-        public static InputMenu s_this;
+        public static InputMenu Instance;
         private Part _part = null;
         private bool _selected;
         private static int s_selectedId;
         public static int SelectedId { get => s_selectedId; }
         private Dictionary<int, int> _originalLayers;
-        void Start()
+        void Awake()
         {
             s_camera = Camera.main;
-            s_this = this;
+            Instance = this;
+            _parts = new();
         }
         public void OnMenuOpen()
         {
@@ -64,7 +65,7 @@ namespace CarGame.Vehicle.Editor.UI
                                  100.0f,
                                  1 << 6)) return;
             if (!hit.collider.CompareTag("Part")) return;
-            s_this.LoadData(hit.collider.GetComponent<PartProxy>().part, false);
+            Instance.LoadData(hit.collider.GetComponent<PartProxy>().part, false);
         }
         public void LoadData(Part part, bool ignoreHistory)
         {

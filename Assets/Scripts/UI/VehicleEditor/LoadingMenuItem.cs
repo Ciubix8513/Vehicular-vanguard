@@ -28,11 +28,12 @@ namespace CarGame.Vehicle.Editor.UI
         {
             var Root = VehicleSaver.GenerateVehicle(
             vehicle,
-            FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent,
+            // FindObjectsOfType<Part>().ToList().Where(_ => _.isRoot).First().transform.parent,
+            InputManager.PlayerVehicle.transform,
             null,
-            out var n);
+            out _);
             InputManager.SetGameCameraTarget(Root.transform);
-            HistoryManager.Root = Root;
+            InputManager.PlayerVehicle.Root = Root;
             HistoryManager.ResetHistory();
             parent.gameObject.SetActive(false);
         }

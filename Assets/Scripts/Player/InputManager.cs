@@ -47,7 +47,13 @@ namespace CarGame.Player
         private Transform _mainCamera;
         private static InputManager s_this;
         public static bool BlockLmb;
-        void Awake() => s_this = this;
+        public static PlayerVehicle PlayerVehicle;
+        void Awake()
+        {
+            PlayerVehicle = FindObjectOfType<PlayerVehicle>();
+            s_this = this;
+        }
+
         void ProcessEK()
         {
             if (mode == Mode.menu) return;
