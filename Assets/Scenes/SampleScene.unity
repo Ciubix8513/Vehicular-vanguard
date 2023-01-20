@@ -701,7 +701,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102281338}
-  m_LocalRotation: {x: 0.0000000022009645, y: 0.99654627, z: 0.08303958, w: -0.000000026413467}
+  m_LocalRotation: {x: 0.0000000050585864, y: 0.99654627, z: 0.08303958, w: -0.00000006070738}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5142,8 +5142,9 @@ GameObject:
   m_Component:
   - component: {fileID: 969734869}
   - component: {fileID: 969734870}
+  - component: {fileID: 969734871}
   m_Layer: 0
-  m_Name: Vehicle
+  m_Name: PlayerVehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5192,6 +5193,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &969734871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969734868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca812bb2cb801bb1a4543e0fc36cd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Root: {fileID: 2035620979}
 --- !u!1 &982013327
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,10 +6378,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1115808759}
-        m_TargetAssemblyTypeName: SceneReloader, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 3
+      - m_Target: {fileID: 969734871}
+        m_TargetAssemblyTypeName: CarGame.Player.PlayerVehicle, Assembly-CSharp
+        m_MethodName: ResetTransform
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8979,7 +8993,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777804621}
-  m_LocalRotation: {x: 0.000000002554691, y: 0.99912417, z: 0.041844726, w: -0.000000060998204}
+  m_LocalRotation: {x: 0.0000000011034917, y: 0.99912417, z: 0.041844726, w: -0.000000026348003}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11029,6 +11043,18 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2035620979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 321576277528404199, guid: 5f11c5f4ced14c8dbbda722af408a1cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835425725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58406992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42acd00195f5daa31ac184a7728e6a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2039823715
 GameObject:
   m_ObjectHideFlags: 0
@@ -11473,8 +11499,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1291321043}
   m_HandleRect: {fileID: 1291321042}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.019926546
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
