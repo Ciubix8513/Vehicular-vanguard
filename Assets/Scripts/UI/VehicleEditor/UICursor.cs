@@ -96,7 +96,8 @@ namespace CarGame.Vehicle.Editor.UI
                 HistoryManager.ProcessChange("Destroying a part");
                 return;
             }
-            (PartGO.Joint = PartGO.gameObject.AddComponent<FixedJoint>()).connectedBody = SnappingObject.GetComponent<Rigidbody>();
+            var j = PartGO.Joint = PartGO.gameObject.AddComponent<FixedJoint>();
+            j.connectedBody = SnappingObject.GetComponent<Rigidbody>();
             PartGO.transform.parent = SnappingObject.transform.parent;
             PartGO.parentFace = SnappingFace * -1;
             PartGO.parentPart = SnappingObject;

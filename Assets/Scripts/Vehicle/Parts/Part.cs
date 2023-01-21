@@ -38,18 +38,19 @@ namespace CarGame.Vehicle
         public FixedJoint Joint;
         public bool WasPlaced = false;
         List<int> _proxiesLayersMemory;
+        private Rigidbody _rigidbody;
         public void TakeDamage(int dmg) => health -= dmg;
         public delegate void ActionDel();
         public virtual List<ActionData> GetActions() =>
         new() {
              new(Activate, "Activate", KeyCode.W, 0),
              new(DeActivate, "Deactivate", KeyCode.W, 1)};
-        //string = action name, KeyCode = action key, int = action type (key up/down)
         public virtual void Activate() => isActive = true;
         public virtual void DeActivate() => isActive = false;
-
         protected virtual void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.sleepThreshold = -1.0f;
             partData = _partScriptable?.data;
             Proxies = GetComponentsInChildren<PartProxy>().ToList();
             //An additional save to avoid null reference exceptions (just in case)
