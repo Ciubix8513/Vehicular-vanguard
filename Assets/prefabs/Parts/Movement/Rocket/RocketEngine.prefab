@@ -172,8 +172,9 @@ MonoBehaviour:
   isActive: 0
   Proxies: []
   Joint: {fileID: 0}
+  WasPlaced: 0
   force: 5000
-  exhaustDir: {x: 0, y: 0, z: 1}
+  exhaustDir: {x: 0, y: 0, z: -1}
   _exhaust: {fileID: 7097586399381669079}
 --- !u!114 &7356512945906941408
 MonoBehaviour:
@@ -213,14 +214,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7097586399381669079}
-  m_LocalRotation: {x: -0.0000004768371, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.495}
+  m_LocalRotation: {x: 0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.495}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4703128305005720377}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -360, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -360, y: 180, z: 0}
 --- !u!2083052967 &617225751626797364
 VisualEffect:
   m_ObjectHideFlags: 0
