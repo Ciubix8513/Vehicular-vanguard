@@ -110,8 +110,10 @@ namespace CarGame.Vehicle.Editor.UI
                 goto end;
             print("Initializing input for a new object");
             PartGO.GetActions().ForEach(_ =>
-            PartGroups.Instance[_.ActionType].Add(_.Key, (_.Delegate, PartGO.GetInstanceID())));
-
+            {
+                PartGroups.Instance[_.ActionType].Add(_.Key, (_.Delegate, PartGO.GetInstanceID()));
+                PartGO.binds.Add(_.Name, new(_.Key, _.ActionType));
+            });
 
         //Using a goto because it's the simplest way
         end:
