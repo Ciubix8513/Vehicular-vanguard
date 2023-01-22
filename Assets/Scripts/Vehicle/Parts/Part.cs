@@ -68,5 +68,11 @@ namespace CarGame.Vehicle
                 SaveProxiesLayers();
             Proxies.ForEach(_ => _.gameObject.layer = layer);
         }
+        //Function to connect parts, virtual for things like wheels 
+        public virtual void PartConnect(Part other)
+        {
+            Joint = gameObject.AddComponent<FixedJoint>();
+            Joint.connectedBody = other._rigidbody;
+        }
     }
 }
