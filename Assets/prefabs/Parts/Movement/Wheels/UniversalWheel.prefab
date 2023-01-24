@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6157291727318883836}
   - component: {fileID: 8426809034198889785}
   - component: {fileID: 3308254846168007054}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Part
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1964337896242465118}
   - component: {fileID: 2346294661115076249}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ MonoBehaviour:
   isActive: 0
   Proxies: []
   Joint: {fileID: 0}
-  _proxiesLayersMemory: 
+  WasPlaced: 0
   _wheelMesh: {fileID: 1692867630582437547}
   WheelCollider: {fileID: 2346294661115076249}
   HasMotor: 1
@@ -297,7 +297,7 @@ MonoBehaviour:
   LeftMax: -10
   RightMax: 10
   TurningSpeed: 0.1
-  MaxTorque: -1000
+  MaxTorque: -2000
   Acceleration: 0.1
   CanBreak: 1
   MaxBreakTorque: 100

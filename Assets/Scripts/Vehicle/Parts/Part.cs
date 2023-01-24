@@ -35,10 +35,10 @@ namespace CarGame.Vehicle
         public bool isActive;
         public Dictionary<string, Tuple<KeyCode, int>> binds = new();
         public List<PartProxy> Proxies;
-        public FixedJoint Joint;
+        public Joint Joint;
         public bool WasPlaced = false;
         List<int> _proxiesLayersMemory;
-        private Rigidbody _rigidbody;
+        public Rigidbody Rigidbody;
         public void TakeDamage(int dmg) => health -= dmg;
         public delegate void ActionDel();
         public virtual List<ActionData> GetActions() =>
@@ -49,8 +49,8 @@ namespace CarGame.Vehicle
         public virtual void DeActivate() => isActive = false;
         protected virtual void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            _rigidbody.sleepThreshold = -1.0f;
+            Rigidbody = GetComponent<Rigidbody>();
+            Rigidbody.sleepThreshold = -1.0f;
             partData = _partScriptable?.data;
             Proxies = GetComponentsInChildren<PartProxy>().ToList();
             //An additional save to avoid null reference exceptions (just in case)
@@ -60,6 +60,7 @@ namespace CarGame.Vehicle
         public void RestoreProxiesLayers()
         {
             for (int i = 0; i < Proxies.Count; i++)
+                if(Proxies[i] != null)
                 Proxies[i].gameObject.layer = _proxiesLayersMemory[i];
         }
         public void SetProxiesLayer(int layer, bool save = false)
@@ -72,7 +73,7 @@ namespace CarGame.Vehicle
         public virtual void PartConnect(Part other)
         {
             Joint = gameObject.AddComponent<FixedJoint>();
-            Joint.connectedBody = other._rigidbody;
+            Joint.connectedBody = other.Rigidbody;
         }
     }
 }

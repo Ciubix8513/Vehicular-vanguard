@@ -119,78 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c1756f88ae780b888c9443e37e7559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  part: {fileID: 2860026367693764048}
---- !u!1 &3271343275684881877
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1964337896242465118}
-  - component: {fileID: 2346294661115076249}
-  m_Layer: 0
-  m_Name: WheelCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1964337896242465118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3271343275684881877}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000044703486}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4538692082064336620}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!146 &2346294661115076249
-WheelCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3271343275684881877}
-  serializedVersion: 2
-  m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 1
-  m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
-    targetPosition: 0.5
-  m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
-  m_Mass: 20
-  m_WheelDampingRate: 0.25
-  m_ForwardFriction:
-    m_ExtremumSlip: 0.4
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 5
-    m_Stiffness: 1
-  m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 7.5
-    m_Stiffness: 1
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_Enabled: 1
-  m_ProvidesContacts: 0
+  part: {fileID: 3235533781482890827}
 --- !u!1 &3870699613029858390
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,9 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4538692082064336620}
   - component: {fileID: 2008118875500625072}
-  - component: {fileID: 2860026367693764048}
+  - component: {fileID: 3235533781482890827}
   m_Layer: 0
-  m_Name: SteeringWheel
+  m_Name: ExperimentalWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +151,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1692867630582437547}
-  - {fileID: 1964337896242465118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -253,7 +181,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2860026367693764048
+--- !u!114 &3235533781482890827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,10 +190,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3870699613029858390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e25f7469cb691a879e3f92ed86a60de, type: 3}
+  m_Script: {fileID: 11500000, guid: 490a3b4b36825a7718067c4adec1d0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _partScriptable: {fileID: 11400000, guid: 0d49bcd0cdc78569498e238c7be1642e, type: 2}
+  _partScriptable: {fileID: 11400000, guid: ebcc5fcc027da8967bbc32678d9b68e7, type: 2}
   partData:
     name: 
     description: 
@@ -290,15 +218,4 @@ MonoBehaviour:
   Proxies: []
   Joint: {fileID: 0}
   WasPlaced: 0
-  _wheelMesh: {fileID: 1692867630582437547}
-  WheelCollider: {fileID: 2346294661115076249}
-  HasMotor: 0
-  CanSteer: 1
-  LeftMax: -10
-  RightMax: 10
-  TurningSpeed: 0.1
-  MaxTorque: -2000
-  Acceleration: 0.1
-  CanBreak: 1
-  MaxBreakTorque: 100
-  _breakAcceleration: 0.1
+  Rigidbody: {fileID: 0}
