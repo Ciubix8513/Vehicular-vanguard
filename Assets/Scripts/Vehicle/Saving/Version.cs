@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarGame.Vehicle.Saving
+namespace VehicularVanguard.Vehicle.Saving
 {
     [System.Serializable]
     public class Version

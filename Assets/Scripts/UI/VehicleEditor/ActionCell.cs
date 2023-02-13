@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class ActionCell : MonoBehaviour
     {

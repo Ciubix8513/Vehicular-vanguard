@@ -2,12 +2,12 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using CarGame.UI.Utils;
-using CarGame.UI;
+using VehicularVanguard.UI.Utils;
+using VehicularVanguard.UI;
 using System.Collections;
-using CarGame.Player;
+using VehicularVanguard.Player;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class SaveDialogue : MonoBehaviour
     {

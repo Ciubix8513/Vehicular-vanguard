@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarGame.UI.Utils
+namespace VehicularVanguard.UI.Utils
 {
     public class ButtonInvoker : MonoBehaviour
     {

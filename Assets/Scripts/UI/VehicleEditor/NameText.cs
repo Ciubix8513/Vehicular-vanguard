@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace CarGame.UI.Utils
+namespace VehicularVanguard.UI.Utils
 {
     public class NameText : MonoBehaviour
     {

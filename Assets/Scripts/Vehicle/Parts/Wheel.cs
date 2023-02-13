@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CarGame.Vehicle.Parts
+namespace VehicularVanguard.Vehicle.Parts
 {
     public class Wheel : Part
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace CarGame.Player
+namespace VehicularVanguard.Player
 {
     public class EditorCamera : MonoBehaviour
     {

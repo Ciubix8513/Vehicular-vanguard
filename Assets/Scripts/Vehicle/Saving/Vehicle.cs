@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CarGame.Vehicle.Saving
+namespace VehicularVanguard.Vehicle.Saving
 {
     [System.Serializable]
     //Making it a class so there's less copying

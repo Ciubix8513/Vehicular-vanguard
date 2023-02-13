@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CarGame.Player;
-using CarGame.Vehicle.Editor;
-using CarGame.Vehicle.Editor.UI;
+using VehicularVanguard.Player;
+using VehicularVanguard.Vehicle.Editor;
+using VehicularVanguard.Vehicle.Editor.UI;
 using UnityEngine;
 
-namespace CarGame.Vehicle.Saving
+namespace VehicularVanguard.Vehicle.Saving
 {
 #nullable enable
     public class VehicleSaver

@@ -1,9 +1,9 @@
 using System.Linq;
-using CarGame.Vehicle;
-using CarGame.Vehicle.Saving;
+using VehicularVanguard.Vehicle;
+using VehicularVanguard.Vehicle.Saving;
 using UnityEngine;
 
-namespace CarGame.Player
+namespace VehicularVanguard.Player
 {
     public class PlayerVehicle : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace CarGame.Vehicle.Saving
+namespace VehicularVanguard.Vehicle.Saving
 {
     [Serializable]
     public struct BindsStruct

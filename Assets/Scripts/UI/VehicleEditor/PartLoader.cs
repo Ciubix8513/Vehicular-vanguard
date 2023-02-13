@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class PartLoader : MonoBehaviour
     {

@@ -1,6 +1,6 @@
-using CarGame.Player;
+using VehicularVanguard.Player;
 
-namespace CarGame.Vehicle.Saving
+namespace VehicularVanguard.Vehicle.Saving
 {
     [System.Serializable]
     public class HistoryVehicle

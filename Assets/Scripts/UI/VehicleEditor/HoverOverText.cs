@@ -1,8 +1,8 @@
 using System.Collections;
-using CarGame.Vehicle.Editor.UI;
+using VehicularVanguard.Vehicle.Editor.UI;
 using UnityEngine;
 
-namespace CarGame.UI.Utils
+namespace VehicularVanguard.UI.Utils
 {
     public class HoverOverText : MonoBehaviour
     {

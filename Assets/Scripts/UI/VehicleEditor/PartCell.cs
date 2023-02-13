@@ -1,8 +1,8 @@
-using CarGame.Player;
+using VehicularVanguard.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class PartCell : MonoBehaviour
     {

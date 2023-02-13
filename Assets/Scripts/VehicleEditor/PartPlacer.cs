@@ -1,6 +1,6 @@
-using CarGame.Vehicle.Editor.UI;
+using VehicularVanguard.Vehicle.Editor.UI;
 using UnityEngine;
-namespace CarGame.Vehicle.Editor
+namespace VehicularVanguard.Vehicle.Editor
 {
     public class PartPlacer : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace CarGame.UI.Utils
+namespace VehicularVanguard.UI.Utils
 {
     public class Modal : MonoBehaviour
     {

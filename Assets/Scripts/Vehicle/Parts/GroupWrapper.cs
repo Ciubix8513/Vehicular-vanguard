@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace CarGame.Vehicle
+namespace VehicularVanguard.Vehicle
 {
     public class GroupWrapper
     {

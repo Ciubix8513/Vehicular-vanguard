@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace CarGame.Vehicle.Editor.Utils
+namespace VehicularVanguard.Vehicle.Editor.Utils
 {
     public class Resizer : MonoBehaviour
     {

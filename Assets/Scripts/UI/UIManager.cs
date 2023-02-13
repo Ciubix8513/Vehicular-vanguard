@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using CarGame.UI.Utils;
+using VehicularVanguard.UI.Utils;
 using UnityEngine;
 
-namespace CarGame.UI
+namespace VehicularVanguard.UI
 {
     public class UIManager : MonoBehaviour
     {

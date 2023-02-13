@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class UICursor : MonoBehaviour
     {

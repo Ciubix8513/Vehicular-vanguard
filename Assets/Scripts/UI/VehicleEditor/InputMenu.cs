@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
-using CarGame.Player;
+using VehicularVanguard.Player;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class InputMenu : MonoBehaviour
     {

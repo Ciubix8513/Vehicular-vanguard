@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarGame.Vehicle
+namespace VehicularVanguard.Vehicle
 {
     public class PartProxy : MonoBehaviour
     {

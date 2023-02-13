@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CarGame.Vehicle
+namespace VehicularVanguard.Vehicle
 {
     [Serializable]
     public struct Attachments

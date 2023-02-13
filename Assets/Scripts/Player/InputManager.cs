@@ -3,11 +3,11 @@ using System.Linq;
 using System;
 using UnityEngine.Events;
 using Cinemachine;
-using CarGame.Vehicle.Editor;
-using CarGame.Vehicle;
-using CarGame.Vehicle.Editor.UI;
+using VehicularVanguard.Vehicle.Editor;
+using VehicularVanguard.Vehicle;
+using VehicularVanguard.Vehicle.Editor.UI;
 
-namespace CarGame.Player
+namespace VehicularVanguard.Player
 {
     [Serializable]
     public enum Mode

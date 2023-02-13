@@ -2,11 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.IO;
-using CarGame.Vehicle.Saving;
+using VehicularVanguard.Vehicle.Saving;
 using System.Linq;
-using CarGame.Player;
+using VehicularVanguard.Player;
 
-namespace CarGame.Vehicle.Editor.UI
+namespace VehicularVanguard.Vehicle.Editor.UI
 {
     public class LoadingMenuItem : MonoBehaviour
     {

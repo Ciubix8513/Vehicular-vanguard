@@ -1,7 +1,7 @@
-using CarGame.Player;
+using VehicularVanguard.Player;
 using UnityEngine;
 
-namespace CarGame.Vehicle.Editor
+namespace VehicularVanguard.Vehicle.Editor
 {
     public class GizmoRaycaster : MonoBehaviour
     {
@@ -93,7 +93,7 @@ namespace CarGame.Vehicle.Editor
             var body = s_rotatingObj.Joint.connectedBody;
             Destroy(s_rotatingObj.Joint);
             (s_rotatingObj.Joint = s_rotatingObj.gameObject.AddComponent<FixedJoint>()).connectedBody = body;
-            CarGame.Vehicle.Editor.HistoryManager.ProcessChange("Rotating a part");
+            VehicularVanguard.Vehicle.Editor.HistoryManager.ProcessChange("Rotating a part");
         }
     }
 }
