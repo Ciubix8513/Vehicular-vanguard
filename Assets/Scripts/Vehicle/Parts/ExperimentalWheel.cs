@@ -15,25 +15,32 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using UnityEngine;
+using VehicularVanguard.Vehicle.PhysicsComponents;
 
 namespace VehicularVanguard.Vehicle.Parts
 {
     public class ExperimentalWheel : Part
     {
+        [SerializeField]
         SimpleWheel wheel;
         private void Awake()
         {
-            wheel = GetComponent<SimpleWheel>();
+            if (wheel == null)
+            {
+                wheel = transform.parent.gameObject.GetComponentInChildren<SimpleWheel>();
+                if (wheel == null)
+                    Debug.LogError("Was unable to get the wheel component");
+            }
             wheel.WheelSize = m_size;
         }
 
-        public override void PartConnect(Part other)
-        {
-            Joint = gameObject.AddComponent<ConfigurableJoint>();
-            Joint.connectedBody = other.Rigidbody;
-            var j = (ConfigurableJoint)Joint;
-            j.xMotion = j.yMotion = j.zMotion = j.angularZMotion = j.angularYMotion = ConfigurableJointMotion.Locked;
-            // j.anchor = 
-        }
+        // public override void PartConnect(Part other)
+        // {
+        //     Joint = gameObject.AddComponent<ConfigurableJoint>();
+        //     Joint.connectedBody = other.Rigidbody;
+        //     var j = (ConfigurableJoint)Joint;
+        //     j.xMotion = j.yMotion = j.zMotion = j.angularZMotion = j.angularYMotion = ConfigurableJointMotion.Locked;
+        //     // j.anchor = 
+        // }
     }
 }

@@ -87,7 +87,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
             IsDragging = true;
             s_image.sprite = data.sprite;
             s_image.gameObject.SetActive(true);
-            PartGO = Instantiate(data.prefab, Vector3.zero, Quaternion.identity).GetComponent<Part>();
+            PartGO = Instantiate(data.prefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<Part>();
             PartGO.partData = s_partData;
             s_originalLayers = new();
             SetLayer(PartGO.transform, 2);
