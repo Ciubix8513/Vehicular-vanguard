@@ -51,8 +51,8 @@ namespace VehicularVanguard.Vehicle.Editor
                 return;
             if (!hit.collider.CompareTag("Part"))
             {
-                UICursor.PartGO.transform.rotation = Quaternion.LookRotation(Vector3.forward, hit.normal);
-                UICursor.PartGO.transform.position = hit.point + Vector3.up * UICursor.PartGO.m_size.y / 2;
+                UICursor.PartGO.DraggingObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, hit.normal);
+                UICursor.PartGO.DraggingObject.transform.position = hit.point + Vector3.up * UICursor.PartGO.m_size.y / 2;
                 UICursor.SnappingObject = null;
                 return;
             }
@@ -86,8 +86,8 @@ namespace VehicularVanguard.Vehicle.Editor
                 return;
             }
             UICursor.SnappingFace = dir;
-            UICursor.PartGO.transform.rotation = part.transform.rotation;
-            UICursor.PartGO.transform.position = part.transform.position + part.transform.rotation * vec;
+            UICursor.PartGO.DraggingObject.transform.rotation = part.transform.rotation;
+            UICursor.PartGO.DraggingObject.transform.position = part.transform.position + part.transform.rotation * vec;
         }
     }
 }

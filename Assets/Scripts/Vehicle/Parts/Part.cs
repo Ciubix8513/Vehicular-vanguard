@@ -53,8 +53,10 @@ namespace VehicularVanguard.Vehicle
         public List<PartProxy> Proxies;
         public Joint Joint;
         public bool WasPlaced = false;
+        int _layerMemory;
         List<int> _proxiesLayersMemory;
         public Rigidbody Rigidbody;
+        public GameObject DraggingObject;
         public void TakeDamage(int dmg) => health -= dmg;
         public delegate void ActionDel();
         public virtual List<ActionData> GetActions() =>
@@ -69,21 +71,33 @@ namespace VehicularVanguard.Vehicle
             Rigidbody.sleepThreshold = -1.0f;
             partData = _partScriptable?.data;
             Proxies = GetComponentsInChildren<PartProxy>().ToList();
+            if (DraggingObject == null)
+                DraggingObject = gameObject;
             //An additional save to avoid null reference exceptions (just in case)
             SaveProxiesLayers();
         }
-        public void SaveProxiesLayers() => _proxiesLayersMemory = Proxies.Select(_ => _.gameObject.layer).ToList();
-        public void RestoreProxiesLayers()
+        public void SaveProxiesLayers()
+        {
+            _proxiesLayersMemory = Proxies.Select(_ => _.gameObject.layer).ToList();
+            _layerMemory = gameObject.layer;
+        }
+
+        public void RestoreProxiesLayers(bool restoreSelf = false)
         {
             for (int i = 0; i < Proxies.Count; i++)
-                if(Proxies[i] != null)
-                Proxies[i].gameObject.layer = _proxiesLayersMemory[i];
+                if (Proxies[i] != null)
+                    Proxies[i].gameObject.layer = _proxiesLayersMemory[i];
+            if (restoreSelf)
+                gameObject.layer = _layerMemory;
         }
-        public void SetProxiesLayer(int layer, bool save = false)
+        public void SetProxiesLayer(int layer, bool save = false, bool changeSelf = false)
         {
             if (save)
                 SaveProxiesLayers();
-            Proxies.ForEach(_ => _.gameObject.layer = layer);
+            if (changeSelf)
+                gameObject.layer = layer;
+            Proxies.ForEach(action: _ => _.gameObject.layer = layer);
+            Debug.Log($"Setting layers of the proxies of {gameObject.name} to {layer}");
         }
         //Function to connect parts, virtual for things like wheels 
         public virtual void PartConnect(Part other)

@@ -54,7 +54,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
         {
             if (IsDragging)
             {
-                PartGO.gameObject.SetActive(false);
+                PartGO.DraggingObject.gameObject.SetActive(false);
                 s_image.gameObject.SetActive(true);
             }
             IsOverUI = true;
@@ -63,7 +63,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
         {
             if (IsDragging)
             {
-                PartGO.gameObject.SetActive(true);
+                PartGO.DraggingObject.gameObject.SetActive(true);
                 s_image.gameObject.SetActive(false);
             }
             IsOverUI = false;
@@ -90,14 +90,16 @@ namespace VehicularVanguard.Vehicle.Editor.UI
             PartGO = Instantiate(data.prefab, Vector3.zero, Quaternion.identity).GetComponentInChildren<Part>();
             PartGO.partData = s_partData;
             s_originalLayers = new();
-            SetLayer(PartGO.transform, 2);
 
-            PartGO.gameObject.SetActive(false);
+            PartGO.SetProxiesLayer(2);
+            // SetLayer(PartGO.transform, 2);
+
+            PartGO.DraggingObject.gameObject.SetActive(false);
         }
 
         public static void EndDragging()
         {
-            if (!PartGO.gameObject.activeSelf)
+            if (!PartGO.DraggingObject.gameObject.activeSelf)
             {
                 PartGroups.Instance[0].RemoveAllByInstanceId(PartGO.GetInstanceID());
                 PartGroups.Instance[1].RemoveAllByInstanceId(PartGO.GetInstanceID());

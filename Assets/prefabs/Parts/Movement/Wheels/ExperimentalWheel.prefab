@@ -397,8 +397,10 @@ MonoBehaviour:
   isRoot: 0
   Activatable: 1
   isActive: 0
-  Proxies: []
+  Proxies:
+  - {fileID: 2908991753716767283}
   Joint: {fileID: 0}
   WasPlaced: 0
   Rigidbody: {fileID: 0}
-  wheel: {fileID: 0}
+  DraggingObject: {fileID: 3870699613029858390}
+  wheel: {fileID: 6286940785179809844}
