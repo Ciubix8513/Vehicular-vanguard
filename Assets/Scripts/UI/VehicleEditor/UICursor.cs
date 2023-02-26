@@ -14,6 +14,7 @@
 //
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -91,6 +92,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
             PartGO.partData = s_partData;
             s_originalLayers = new();
 
+            PartGO.SaveProxiesLayers();
             PartGO.SetProxiesLayer(2);
             // SetLayer(PartGO.transform, 2);
 
@@ -120,6 +122,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
             PartGO.parentPart = SnappingObject;
             SnappingObject.attachedParts[SnappingFace] = true;
             PartGO.attachedParts[-SnappingFace] = true;
+            PartGO.RestoreProxiesLayers(true);
             if (PartGO.WasPlaced)
                 goto end;
             PartGO.WasPlaced = true;

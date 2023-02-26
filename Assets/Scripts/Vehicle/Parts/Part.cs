@@ -54,7 +54,7 @@ namespace VehicularVanguard.Vehicle
         public Joint Joint;
         public bool WasPlaced = false;
         int _layerMemory;
-        List<int> _proxiesLayersMemory;
+        List<int> _proxiesLayersMemory = new();
         public Rigidbody Rigidbody;
         public GameObject DraggingObject;
         public void TakeDamage(int dmg) => health -= dmg;

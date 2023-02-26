@@ -14,6 +14,7 @@
 //
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using VehicularVanguard.Vehicle.Editor.UI;
 using UnityEngine;
 namespace VehicularVanguard.Vehicle.Editor
@@ -39,7 +40,8 @@ namespace VehicularVanguard.Vehicle.Editor
                 UICursor.PartGO.Joint.connectedBody = null;
             }
             UICursor.PartGO.transform.parent = null;
-            UICursor.SetLayer(UICursor.PartGO.transform, 2);
+            UICursor.PartGO.SetProxiesLayer(2, true, true);
+            // UICursor.SetLayer(UICursor.PartGO.transform, 2);
         }
         //TODO pull out the stuff into separate functions 
         private void Update()
