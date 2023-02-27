@@ -117,7 +117,7 @@ namespace VehicularVanguard.Vehicle.Editor.UI
                 return;
             }
             PartGO.PartConnect(SnappingObject);
-            PartGO.transform.parent = SnappingObject.transform.parent;
+            PartGO.DraggingObject.transform.parent = SnappingObject.transform.parent;
             PartGO.parentFace = SnappingFace * -1;
             PartGO.parentPart = SnappingObject;
             SnappingObject.attachedParts[SnappingFace] = true;

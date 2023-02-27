@@ -39,7 +39,7 @@ namespace VehicularVanguard.Vehicle.Editor
                 UICursor.PartGO.attachedParts[UICursor.PartGO.parentFace] = false;
                 UICursor.PartGO.Joint.connectedBody = null;
             }
-            UICursor.PartGO.transform.parent = null;
+            UICursor.PartGO.DraggingObject.transform.parent = null;
             UICursor.PartGO.SetProxiesLayer(2, true, true);
             // UICursor.SetLayer(UICursor.PartGO.transform, 2);
         }
